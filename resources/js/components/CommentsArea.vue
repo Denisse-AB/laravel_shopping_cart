@@ -61,12 +61,15 @@ import ModalComponent from './ModalComponent.vue';
 
 export default {
 
-    props:['user', 'userId', 'itemId'],
+    props: {
+        user: String,
+        userId: Number,
+        itemId: Number
+    },
 
     components : {
         ModalComponent
     },
-
 
     mounted(){
         this.fetch();

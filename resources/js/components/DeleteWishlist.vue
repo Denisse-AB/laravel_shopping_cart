@@ -13,10 +13,6 @@ export default {
         itemId: String
     },
 
-    mounted() {
-        console.log('Component mounted.')
-    },
-
     data: function () {
         return {
             status: this.itemId,

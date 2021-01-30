@@ -100,15 +100,15 @@
 <script>
 export default {
 
-    props:[
-        'customerId',
-        'customerName',
-        'customerAddress',
-        'customerCity',
-        'customerState',
-        'customerZip',
-        'customerTel'
-    ],
+    props: {
+        customerId: Number,
+        customerName: String,
+        customerAddress: String,
+        customerCity: String,
+        customerState: String,
+        customerZip: String,
+        customerTel: Number
+    },
 
     data(){
         return {

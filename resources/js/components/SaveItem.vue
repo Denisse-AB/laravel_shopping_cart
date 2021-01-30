@@ -9,7 +9,10 @@
 <script>
 export default {
 
-    props: ['itemId', 'checkdb'],
+    props: {
+        itemId: Number,
+        checkdb: String
+    },
 
     data: function () {
         return {

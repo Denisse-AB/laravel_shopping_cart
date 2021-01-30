@@ -23,7 +23,9 @@
 <script>
 export default {
 
-    props:['commentId'],
+    props: {
+      commentId: Number
+    },
 
     data(){
         return {
