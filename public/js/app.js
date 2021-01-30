@@ -1999,7 +1999,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user', 'userId', 'itemId'],
+  props: {
+    user: String,
+    userId: Number,
+    itemId: Number
+  },
   components: {
     ModalComponent: _ModalComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -2133,9 +2137,6 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     itemId: String
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
   data: function data() {
     return {
       status: this.itemId
@@ -2176,9 +2177,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     itemId: String
-  },
-  mounted: function mounted() {
-    console.log('Component mounted.');
   },
   data: function data() {
     return {
@@ -2309,7 +2307,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['customerId', 'customerName', 'customerAddress', 'customerCity', 'customerState', 'customerZip', 'customerTel'],
+  props: {
+    customerId: Number,
+    customerName: String,
+    customerAddress: String,
+    customerCity: String,
+    customerState: String,
+    customerZip: String,
+    customerTel: Number
+  },
   data: function data() {
     return {
       show: false,
@@ -2421,9 +2427,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
   data: function data() {
     return {
       quantity: 1
@@ -2481,7 +2484,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['commentId'],
+  props: {
+    commentId: Number
+  },
   data: function data() {
     return {
       text: '',
@@ -2532,7 +2537,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['itemId', 'checkdb'],
+  props: {
+    itemId: Number,
+    checkdb: String
+  },
   data: function data() {
     return {
       status: this.checkdb
