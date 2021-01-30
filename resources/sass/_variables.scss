@@ -1,0 +1,170 @@
+// Body
+$body-bg: #ffffff;
+
+// Typography
+$font-family-sans-serif: 'Comfortaa', cursive;
+$fira-sans: 'Fira Sans', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+
+//media variables
+$xsm: 575.98px;
+$sm: 767.98px;
+$tablet: 768px;
+$tablet2: 768px;
+$laptop: 1024px;
+
+//mixin
+@mixin xsm {
+  @media (max-width: #{$xsm}) {
+      @content;
+  }
+}
+@mixin sm {
+  @media (max-width: #{$sm}) {
+      @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: #{$tablet}) {
+      @content;
+  }
+}
+@mixin tablet2 {
+  @media (min-width: #{$tablet2}) {
+      @content;
+  }
+}
+
+@mixin laptop {
+  @media (min-width: #{$laptop}) {
+      @content;
+  }
+}
+
+//scss
+body{
+    margin: 0;
+}
+
+nav.navbar{
+    background-color: $teal;
+    #navbar{
+        margin-right: 10px;
+    }
+    #count{
+        color: white;
+    }
+    a:hover{
+        background-color: #3caa9f;
+    }
+}
+div#cardContainer {
+    @include tablet2(){
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+div#footer{
+    color:white;
+    .fab{
+        font-size: 30px;
+        padding: 10px;
+    }
+    .fa-instagram{
+        color: #c32aa3;
+    }
+    .fa-google{
+        color: #ea4335;
+    }
+    .fa-twitter-square{
+        color: #08a0e9;
+    }
+    .fa-facebook-square{
+        color: #3B5998;
+    }
+}
+button.minus{
+    @include tablet(){
+        margin-top: 2px;
+        margin-right: 16px;
+    }
+}
+
+#firaSans{
+    font-family: $fira-sans;
+    color: #8c8c8c;
+    text-shadow: 2px 2px 5px gray;
+    -webkit-text-stroke: 1px #595959;
+}
+#infoBox{
+    background: linear-gradient(to bottom, #ecf8f7 30%, #ffffff 100%);
+}
+
+#textarea {
+   resize: none;
+}
+
+#textarea.form-control:focus {
+    border-color: $teal;
+    box-shadow: 0 0 0 0.2rem rgba(77, 192, 181, 0.75); //blur 0.25
+}
+
+#reply{
+    background-color: #d9f2ef;
+    border: 1px solid $teal;
+    border-radius: 9px;
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+    div#cardContainer {
+        margin-left: 20px !important;
+        margin-right: auto !important;
+    }
+}
+/**
+ * Stripe element.
+ */
+.StripeElement {
+  box-sizing: border-box;
+
+  height: 40px;
+
+  padding: 10px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+//bootstrap padding
+[class*="col-"] {
+  padding: 1rem;
+}
