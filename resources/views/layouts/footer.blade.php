@@ -3,7 +3,7 @@
         <div class="container-fluid padding">
             <div class="row text-center padding">
                 <div class="col-12">
-                    <h5 class="display-4 pt-3" id="font">footer</h5>
+                    <h5 class="display-4 pt-3" id="font">E-Shop</h5>
                     <hr>
                 </div>
 
