@@ -10,7 +10,7 @@
 export default {
 
     props: {
-        itemId: Number,
+        itemId: String,
         checkdb: String
     },
 

@@ -24,7 +24,7 @@
 export default {
 
     props: {
-      commentId: Number
+      commentId: String
     },
 
     data(){

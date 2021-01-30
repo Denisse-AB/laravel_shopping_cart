@@ -101,13 +101,13 @@
 export default {
 
     props: {
-        customerId: Number,
+        customerId: String,
         customerName: String,
         customerAddress: String,
         customerCity: String,
         customerState: String,
         customerZip: String,
-        customerTel: Number
+        customerTel: String
     },
 
     data(){

@@ -63,8 +63,8 @@ export default {
 
     props: {
         user: String,
-        userId: Number,
-        itemId: Number
+        userId: String,
+        itemId: String
     },
 
     components : {
