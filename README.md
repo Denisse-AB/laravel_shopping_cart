@@ -12,7 +12,7 @@ Stripe ready Shopping Cart with Laravel 8 and Vue.js.
 
 ---
 
-<p>
+<p align="center">
   <img src="public\images\screenshot(1).jpg" width="300" alt="screenshot">
   <img src="public\images\screenshot(2).jpg" width="300" alt="screenshot">
 </p>
