@@ -5,7 +5,7 @@
 
     @if (session('status'))
 
-        <div class="alert alert-warning alert-dismissible fade show w-50 offset-3" role="alert">
+        <div class="alert alert-info alert-dismissible fade show w-50 offset-3" role="alert">
             {{ session('status') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
