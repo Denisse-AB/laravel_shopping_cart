@@ -95,7 +95,15 @@ class SessionController extends Controller
 
         $request->session('cart')->forget('cart.'.$id);
 
+        if (!$cart) {
+
+            $items = Items::all()->shuffle();
+
+            return view('index', compact('items'));
+        }
+        
         return redirect()->back();
+
     }
 
 }
