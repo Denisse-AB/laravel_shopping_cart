@@ -6,16 +6,6 @@
     <div class="row">
         <div class="col-md-8">
 
-            @if (session('success'))
-
-            <div class="alert alert-success alert-dismissible fade show w-50 offset-3" role="alert">
-                {{ session('success') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            @endif
             @if (session('status'))
 
             <div class="alert alert-warning alert-dismissible fade show w-50 offset-3" role="alert">

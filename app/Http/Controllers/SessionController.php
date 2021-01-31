@@ -95,7 +95,7 @@ class SessionController extends Controller
 
         $request->session('cart')->forget('cart.'.$id);
 
-        return redirect()->back()->with('success', 'Item Deleted!');
+        return redirect()->back();
     }
 
 }
