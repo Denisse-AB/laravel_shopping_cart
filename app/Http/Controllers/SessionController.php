@@ -25,7 +25,7 @@ class SessionController extends Controller
 
         $checkdb = SaveForLater::where('item_id', $item_id)->exists();
 
-        // if cart is empty create the cart.
+        // If the cart is empty, create the cart.
         if(!$cart) {
 
             $cart = [
@@ -44,14 +44,13 @@ class SessionController extends Controller
 
         }
 
-        // if cart not empty then check if this product exist then increment quantity
+        // If the cart is not empty, then check if this product exist.
         if(isset($cart[$id])) {
 
             return redirect()->back()->with('status', 'Product already added to the cart');
-
         }
 
-        // if item not exist in cart then add to cart.
+        // If the product doesn't exist in cart then add it to cart.
         $cart[$id] = [
                     "itemId" => $id,
                     "quantity" => $qty,
@@ -101,7 +100,7 @@ class SessionController extends Controller
 
             return view('index', compact('items'));
         }
-        
+
         return redirect()->back();
 
     }
