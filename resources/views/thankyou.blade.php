@@ -16,7 +16,6 @@
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
                         <th scope="col">Qty</th>
-                        <th scope="col">Size</th>
                         <th scope="col">Total</th>
                     </tr>
                 </thead>
@@ -27,7 +26,6 @@
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->price }}</td>
                         <td>{{ $item->qty }}</td>
-                        <td>{{ $item->size }}</td>
                         <td>{{ $item->total }}</td>
                     </tr>
                     @endforeach

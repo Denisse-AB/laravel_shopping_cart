@@ -17,7 +17,6 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('item_id');
-            $table->string('size');
             $table->string('qty');
             $table->decimal('total', 6 , 2);
             $table->decimal('tax');

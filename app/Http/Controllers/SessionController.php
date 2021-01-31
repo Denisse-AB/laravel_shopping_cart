@@ -20,14 +20,8 @@ class SessionController extends Controller
 
         //variables
         $cart = session()->get('cart');
-        $size = $request->input('size');
         $qty =  $request->input('qty');
         $price =  $request->input('price');
-
-        if (!$size) {
-
-            return redirect()->back()->with('status', 'Please, Select a size.');
-        }
 
         $checkdb = SaveForLater::where('item_id', $item_id)->exists();
 
@@ -38,7 +32,6 @@ class SessionController extends Controller
                      $id => [
                         "itemId" => $id,
                         "quantity" => $qty,
-                        "size" => $size,
                         "price" => $price,
                         "subtotal" => $price * $qty,
                         "checkdb" => $checkdb,
@@ -62,7 +55,6 @@ class SessionController extends Controller
         $cart[$id] = [
                     "itemId" => $id,
                     "quantity" => $qty,
-                    "size" => $size,
                     "price" => $price,
                     "subtotal" => $price * $qty,
                     "checkdb" => $checkdb,
@@ -76,7 +68,7 @@ class SessionController extends Controller
     public function show(Request $request)
     {
         $cart = session()->get('cart');
-        
+
         if (!$cart) {
 
             $items = Items::all()->shuffle();

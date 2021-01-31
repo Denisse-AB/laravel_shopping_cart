@@ -104,13 +104,11 @@ class CheckoutController extends Controller
             $price = session('cart')[$key]['price'];
             $itemIds = session('cart')[$key]['itemId'];
             $qty = session('cart')[$key]['quantity'];
-            $size = session('cart')[$key]['size'];
 
             $db = auth()->user()->orders()->create([
                 'user_id' => $customer,
                 'item_id' => $itemIds,
                 'qty' => $qty,
-                'size' => $size,
                 'total' => $total,
                 'tax' => $tax,
                 'status' => $response->getStatusCode(),
@@ -130,7 +128,7 @@ class CheckoutController extends Controller
         }
         //send Mail.
         // Mail::to($customer->email)->send($orders);
-        
+
         return view('thankyou', compact('db'));
 
         } catch(CardException $e){

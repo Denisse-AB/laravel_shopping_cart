@@ -13,11 +13,11 @@ Thank You {{ $customer->name }}, for your order!
 @component('mail::table')
     <tr>
        <th align="left">Items</th>
-       <th align="left">Price</th> 
-    </tr> 
+       <th align="left">Price</th>
+    </tr>
     <tr>
         <td><h3>{{ $order->name ?? "name" }}</h3>
-            <p>qty: {{ $order->qty }} size: {{ $order->size }}</p>
+            <p>qty: {{ $order->qty }}</p>
             <p>Item #: {{ $order->item_id }}</p>
         </td>
     <td>${{ $order->price * $order->qty }}</td>

@@ -45,36 +45,16 @@
                 <h5 class="text-center py-3">{{ $items->description }}</h5>
             </div>
             <div class="row">
-                <div class="col-6 text-center">
-                    <label for="qty" class="pr-2 font-weight-bold">Qty:</label>
+                <div class="col-12 text-center">
                     <button type='button' name="plus" class='btn bg-light border rounded-circle'><i class='fas fa-plus'></i></button>
                     <input type='text' name="quantity" id="qty" value="1" class='form-control d-inline' style="width:50px;" disabled>
                     <button type='button' name="minus" class='btn bg-light border rounded-circle minus'><i class='fas fa-minus'></i></button>
-                </div>
-                <div class="col-6">
-                    <label for="size" class="font-weight-bold pr-3">Size:</label>
-                    <div class="btn-group" role="group">
-                        <div class="btn-group" role="group">
-                            <button id="size" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                Size
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <button type="button" class="dropdown-item size">x-small</button>
-                                <button type="button" class="dropdown-item size">small</button>
-                                <button type="button" class="dropdown-item size">medium</button>
-                                <button type="button" class="dropdown-item size">large</button>
-                                <button type="button" class="dropdown-item size">x-large</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <form action="/item/{{ $items->id }}" method="POST">
                 @csrf
                 <button type="submit" name="add" class="btn btn-outline-secondary mt-4 btn-block">Add to cart</button>
                 <input type="hidden" name="itemId" value="{{ $items->id }}" required>
-                <input type="hidden" name="size" value="" required>
                 <input type="hidden" name="qty" value="1" required>
                 <input type="hidden" name="price" value="{{ $items->price }}" required>
             </form>

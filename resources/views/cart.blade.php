@@ -34,7 +34,6 @@
                         @if ($value['itemId'] == $item->id)
 
                             @php
-                                $size = session('cart')[$key]["size"];
                                 $qty = session('cart')[$key]["quantity"];
                                 $price = session('cart')[$key]["price"];
                                 $itemTotal = session('cart')[$key]["subtotal"];
@@ -52,9 +51,7 @@
                                     <div class="card-body">
                                     <h5 class="card-title">{{ $item->name }}</h5>
                                     <p class="card-text">{{ $item->description }}</p>
-                                        <p class="card-text"><small class="text-muted">Size:
-                                            {{ $size }}
-                                        </small><small class="text-muted offset-2"><span>Qty:
+                                        <p class="card-text"><small class="text-muted offset-2"><span>Qty:
                                             {{ $qty }}
                                         </span></small>
                                         <small class="text-muted offset-2"><span>Total:
