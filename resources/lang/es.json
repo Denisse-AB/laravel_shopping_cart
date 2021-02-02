@@ -13,5 +13,8 @@
     "Your Items" : "Tus productos",
     "Shipping will be determing in next page" : "Costo de manejo y envío en la próxima página",
     "E-Mail Address" : "Correo electrónico",
-    "Forgot Your Password?" : "Olvidaste tu Password?"
+    "Forgot Your Password?" : "Olvidaste tu Password?",
+    "Credit or debit card" : "Débito o Crédito",
+    "Pay with Stripe" : "Paga con Stripe",
+    "Your Info" : "Tu Info"
 }

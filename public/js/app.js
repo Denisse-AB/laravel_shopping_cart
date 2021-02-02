@@ -2320,7 +2320,8 @@ __webpack_require__.r(__webpack_exports__);
     customerCity: String,
     customerState: String,
     customerZip: String,
-    customerTel: String
+    customerTel: String,
+    lang: String
   },
   data: function data() {
     return {
@@ -2407,6 +2408,17 @@ __webpack_require__.r(__webpack_exports__);
           alert('Error updating try again later.');
         }
       });
+    }
+  },
+  computed: {
+    edit: function edit() {
+      return this.lang == 'es' ? 'Edita tu Direccion' : 'Edit your address';
+    },
+    pass: function pass() {
+      return this.lang == 'es' ? 'Cambia tu password' : 'Change your Password';
+    },
+    acc: function acc() {
+      return this.lang == 'es' ? 'Cuenta' : 'Account';
     }
   }
 });
@@ -39310,9 +39322,11 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-sm-6 text-center" }, [
           _c("div", { staticClass: "row justify-content-center p-3" }, [
-            _c("h1", { staticClass: "display-4", attrs: { id: "firaSans" } }, [
-              _vm._v("Account")
-            ]),
+            _c("h1", {
+              staticClass: "display-4",
+              attrs: { id: "firaSans" },
+              domProps: { textContent: _vm._s(_vm.acc) }
+            }),
             _vm._v(" "),
             _c(
               "div",
@@ -39357,15 +39371,12 @@ var render = function() {
                     _vm._v(" "),
                     _c("p", [_vm._v(_vm._s(_vm.customerTel))]),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-secondary btn-sm mb-3",
-                        attrs: { type: "button" },
-                        on: { click: _vm.form }
-                      },
-                      [_vm._v("Edit your address")]
-                    )
+                    _c("button", {
+                      staticClass: "btn btn-secondary btn-sm mb-3",
+                      attrs: { type: "button" },
+                      domProps: { textContent: _vm._s(_vm.edit) },
+                      on: { click: _vm.form }
+                    })
                   ]
                 ),
                 _vm._v(" "),
@@ -39641,16 +39652,9 @@ var render = function() {
                     attrs: { role: "alert" }
                   },
                   [
-                    _vm._v("\n                            Account Updated! "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "alert-link",
-                        attrs: { href: "/account" }
-                      },
-                      [_vm._v("Go back.")]
-                    ),
-                    _vm._v(".\n                        ")
+                    _vm._v(
+                      "\n                            Account Updated!\n                        "
+                    )
                   ]
                 )
               ]
@@ -40085,23 +40089,20 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.passForm == false,
-                        expression: "passForm == false"
-                      }
-                    ],
-                    staticClass: "btn btn-secondary btn-sm",
-                    attrs: { type: "button" },
-                    on: { click: _vm.showPassform }
-                  },
-                  [_vm._v("Change your Password")]
-                )
+                _c("button", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.passForm == false,
+                      expression: "passForm == false"
+                    }
+                  ],
+                  staticClass: "btn btn-secondary btn-sm",
+                  attrs: { type: "button" },
+                  domProps: { textContent: _vm._s(_vm.pass) },
+                  on: { click: _vm.showPassform }
+                })
               ])
             ]
           )

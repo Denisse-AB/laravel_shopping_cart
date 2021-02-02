@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Laravel\Cashier\Cashier;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use Stripe\Exception\CardException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -35,10 +36,12 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function show(Request $request)
+    public function show(Request $request, $lang)
     {
         $user = Auth::user();
         $cart = session()->get('cart');
+
+        App::setlocale($lang);
 
         if (!$cart) {
 
@@ -132,6 +135,7 @@ class CheckoutController extends Controller
         return view('thankyou', compact('db'));
 
         } catch(CardException $e){
+            // TODO: MESSAGE IN SPANISH
             return redirect()->back()->with('status', $e->getMessage());
 
         } catch (Exception $e) {

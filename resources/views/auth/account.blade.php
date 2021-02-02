@@ -12,6 +12,7 @@
                 customer-state='{{ $customer->state }}'
                 customer-zip='{{ $customer->zip }}'
                 customer-tel='{{ $customer->tel }}'
+                lang='{{ __('lang.en')}}'
                 ></edit-user>
                 <br><br>
             </div>

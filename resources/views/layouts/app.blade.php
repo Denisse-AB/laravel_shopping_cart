@@ -90,11 +90,11 @@
                                         @lang('lang.logout')
                                     </a>
 
-                                    <a class="dropdown-item" href="/account">
+                                    <a class="dropdown-item" href="/account/{{ __('lang.en')}}">
                                         @lang('lang.account')
                                     </a>
 
-                                    <a class="dropdown-item" href="/checkout">
+                                    <a class="dropdown-item" href="/checkout/{{ __('lang.en')}}">
                                         @lang('lang.checkout')
                                     </a>
 

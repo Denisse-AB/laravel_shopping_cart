@@ -42,9 +42,9 @@ Auth::routes();
 
 Route::get('/wishlist', 'SaveForLaterController@show')->name('wishlist.show');
 
-Route::get('/account', 'UserController@show')->name('account.show');
+Route::get('/account/{lang}', 'UserController@show')->name('account.show');
 
-Route::get('/checkout', 'CheckoutController@show')->name('checkout.show');
+Route::get('/checkout/{lang}', 'CheckoutController@show')->name('checkout.show');
 
 Route::post(
     'stripe/webhook',

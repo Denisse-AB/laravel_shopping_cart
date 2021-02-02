@@ -10,7 +10,10 @@ return [
     'logout' => 'Salir',
     'account' => 'Tu Cuenta',
     'checkout' => 'Pagar',
-    'cart' => 'Añade al Carrito'
+    'cart' => 'Añade al Carrito',
+    'remove' => 'Remover',
+    'shipping' => 'Envio'
+
 ]
 
 ?>

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-sm-6 text-center">
                 <div class="row justify-content-center p-3">
-                    <h1 id="firaSans" class="display-4">Account</h1>
+                    <h1 id="firaSans" class="display-4" v-text="acc"></h1>
                         <div id="infoBox" class="rounded border border-success text-center w-75 mx-auto shadow">
                             <div v-show="hide">
                             <h5 class="lead p-2 mt-2 font-weight-bold">{{ customerName }}</h5>
@@ -15,7 +15,7 @@
                                     <span>{{ customerZip }}</span>
                                 </p>
                                 <p>{{ customerTel }}</p>
-                                <button type="button" @click="form" class="btn btn-secondary btn-sm mb-3">Edit your address</button>
+                                <button type="button" @click="form" class="btn btn-secondary btn-sm mb-3" v-text="edit"></button>
                             </div>
                                 <form v-show="show" class="m-2" @submit.prevent="submit">
                                     <div class="form-row">
@@ -56,7 +56,7 @@
                                     <button type="submit" class="btn btn-secondary btn-sm">Edit your info</button>
                                 </form>
                             <div v-show="alert" class="alert alert-success mt-3" role="alert">
-                                Account Updated! <a href="/account" class="alert-link">Go back.</a>.
+                                Account Updated!
                             </div>
                         </div>
                 </div>
@@ -87,7 +87,7 @@
                             <button @click.prevent="reveal" class="btn btn-light btn-sm float-left"><i class="fas fa-eye" style="font-size: 17px;"></i></button>
                             <button class="btn btn-secondary btn-sm" type="submit">Submit</button>
                         </form>
-                        <button v-show="passForm == false" @click="showPassform" class="btn btn-secondary btn-sm" type="button">Change your Password</button>
+                        <button v-show="passForm == false" @click="showPassform" class="btn btn-secondary btn-sm" type="button" v-text="pass"></button>
                     </div>
                 </div>
             </div>
@@ -107,7 +107,8 @@ export default {
         customerCity: String,
         customerState: String,
         customerZip: String,
-        customerTel: String
+        customerTel: String,
+        lang: String
     },
 
     data(){
@@ -206,5 +207,17 @@ export default {
             });
         }
     },
+    computed: {
+        edit(){
+            return (this.lang == 'es') ? 'Edita tu Direccion' : 'Edit your address';
+        },
+        pass () {
+           return (this.lang == 'es') ? 'Cambia tu password' : 'Change your Password';
+        },
+        acc () {
+            return (this.lang == 'es') ? 'Cuenta' : 'Account';
+        }
+    }
+
 }
 </script>

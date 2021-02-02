@@ -88,8 +88,8 @@
                     @guest
                         <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#login">{{ __('Proceed to checkout')}}</button>
                     @else
-                    {{-- TODO: LAST TRANSLATION PAGE --}}
-                        <a href="/checkout" type="button" class="btn btn-outline-secondary btn-block" role="button">{{ __('Proceed to checkout')}}</a>
+                    
+                        <a href="/checkout/{{ __('lang.en')}}" type="button" class="btn btn-outline-secondary btn-block" role="button">{{ __('Proceed to checkout')}}</a>
                     @endguest
 
                     <!-- Modal -->
