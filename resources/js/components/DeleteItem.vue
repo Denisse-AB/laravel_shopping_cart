@@ -1,7 +1,12 @@
 <template>
 
     <form @submit="submit">
-        <button type="submit" value='submit' class="btn btn-danger btn-sm float-right m-2">Remove</button>
+        <div v-if="lang == 'es'">
+            <button type="submit" value='submit' class="btn btn-danger btn-sm float-right m-2">Remover</button>
+        </div>
+        <div v-else>
+            <button type="submit" value='submit' class="btn btn-danger btn-sm float-right m-2">Remove</button>
+        </div>
     </form>
 
 </template>
@@ -10,7 +15,8 @@
 export default {
 
     props: {
-        itemId: String
+        itemId: String,
+        lang: String
     },
 
     data: function () {
@@ -21,7 +27,7 @@ export default {
 
     methods: {
         submit(){
-            axios.delete('/item/' + this.itemId, {
+            axios.delete(`/item/${this.itemId}`, {
                  method: 'DELETE',
             })
             .catch(error => {

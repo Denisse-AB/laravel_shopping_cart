@@ -30,13 +30,11 @@ Route::get('/lang/{lang}', function ($lang) {
 
 Route::get('/', 'ItemsController@index')->name('items.index');
 
-Route::get('/items', 'ItemsController@items')->name('items.get');
+Route::get('/items/{item}/{lang}', 'ItemsController@show')->name('items.show');
 
-Route::get('/items/{item}', 'ItemsController@show')->name('items.show');
+Route::post('/item/{item_id}/{lang}', 'SessionController@store')->name('items.store');
 
-Route::post('/item/{item_id}', 'SessionController@store')->name('items.store');
-
-Route::get('/cart', 'SessionController@show')->name('cart.show');
+Route::get('/cart/{lang}', 'SessionController@show')->name('cart.show');
 
 Route::delete('/item/{id}', 'SessionController@delete')->name('item.destroy');
 

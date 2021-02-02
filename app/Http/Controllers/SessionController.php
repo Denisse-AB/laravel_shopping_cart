@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\SaveForLater;
 use App\Items;
+use App\SaveForLater;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
 {
-    public function store(Request $request, $item_id)
+    public function store(Request $request, $item_id, $lang)
     {
         $item = Items::findOrFail($item_id);
+
+        App::setlocale($lang);
 
         //int conversion
         $id = intval($item_id);
@@ -40,12 +43,20 @@ class SessionController extends Controller
 
             session()->put('cart', $cart);
 
+            if ($lang == 'es') {
+                return redirect()->back()->with('success', 'Poducto añadido al carrito!');
+            }
+
             return redirect()->back()->with('success', 'Product added to cart successfully!');
 
         }
 
         // If the cart is not empty, then check if this product exist.
         if(isset($cart[$id])) {
+
+            if ($lang == 'es') {
+                return redirect()->back()->with('status', 'Tu producto ya está en el carrito!');
+            }
 
             return redirect()->back()->with('status', 'Product already added to the cart');
         }
@@ -61,12 +72,18 @@ class SessionController extends Controller
 
         session()->put('cart', $cart);
 
+        if ($lang == 'es') {
+            return redirect()->back()->with('success', 'Poducto añadido al carrito!');
+        }
+
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
-    public function show(Request $request)
+    public function show(Request $request, $lang)
     {
         $cart = session()->get('cart');
+
+        App::setlocale($lang);
 
         if (!$cart) {
 

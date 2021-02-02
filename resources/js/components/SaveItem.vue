@@ -11,7 +11,8 @@ export default {
 
     props: {
         itemId: String,
-        checkdb: String
+        checkdb: String,
+        lang: String
     },
 
     data: function () {
@@ -22,8 +23,8 @@ export default {
 
     methods: {
         submit(){
-            axios.post('/saveForLater/' + this.itemId)
-            .then(response => {
+            axios.post(`/saveForLater/${this.itemId}`)
+            .then(_response => {
                 this.status = ! this.status;
             })
             .catch(errors => {
@@ -38,7 +39,11 @@ export default {
 
     computed: {
             buttonText(){
-                return (this.status) ? 'Item save in wishlist' :'Save for Later' ; //? ternary operator js (if or else statement)
+                if (this.lang == 'en') {
+                    return (this.status) ? 'Item save in wishlist' :'Save for Later' ;
+                } else {
+                    return (this.status) ? 'Producto en tu lista' :'Guardar en tu lista' ;
+                }
             },
 
             isDisabled(){

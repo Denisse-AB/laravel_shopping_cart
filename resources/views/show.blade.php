@@ -6,6 +6,7 @@
     @if (session('status'))
 
         <div class="alert alert-info alert-dismissible fade show w-50 offset-3" role="alert">
+            }
             {{ session('status') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -51,9 +52,9 @@
                     <button type='button' name="minus" class='btn bg-light border rounded-circle minus'><i class='fas fa-minus'></i></button>
                 </div>
             </div>
-            <form action="/item/{{ $items->id }}" method="POST">
+            <form action="/item/{{ $items->id }}/{{ __('lang.en')}}" method="POST">
                 @csrf
-                <button type="submit" name="add" class="btn btn-outline-secondary mt-4 btn-block">Add to cart</button>
+                <button type="submit" name="add" class="btn btn-outline-secondary mt-4 btn-block">@lang('lang.cart')</button>
                 <input type="hidden" name="itemId" value="{{ $items->id }}" required>
                 <input type="hidden" name="qty" value="1" required>
                 <input type="hidden" name="price" value="{{ $items->price }}" required>
@@ -69,7 +70,7 @@
     <div class="container border rounded w-75 my-3">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h5>Leave a comment</h5>
+                <h5>@lang('Leave a comment')</h5>
                 <hr>
             </div>
             <!-- comments -->
@@ -86,8 +87,8 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="d-flex align-items-baseline">
-                        <a href="/login" class="btn btn-secondary btn-sm d-flex justify-content-start badge-pill" type="role">Login</a>
-                        <h4 class="offset-4">Leave a comment</h4>
+                        <a href="/login" class="btn btn-secondary btn-sm d-flex justify-content-start badge-pill" type="role">@lang('lang.login')</a>
+                        <h4 class="offset-4">@lang('Leave a comment')</h4>
                     </div>
                     <hr>
                     @foreach ($comments as $comment)

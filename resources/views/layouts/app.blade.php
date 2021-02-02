@@ -37,7 +37,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        @php $locale = session()->get('locale'); @endphp
                         <a class="nav-item nav-link active badge-pill" href="{{ url('/') }}">@lang('lang.home')</a>
                         <a class="nav-item nav-link active badge-pill" href="/wishlist">@lang('lang.wishlist')</a>
                         <li class="nav-item dropdown">
@@ -76,7 +75,7 @@
                             @endphp
 
                             <li>
-                                <a href="/cart" class="nav-item nav-link active badge-pill"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                <a href="/cart/{{ __('lang.en')}}" class="nav-item nav-link active badge-pill"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
@@ -115,7 +114,7 @@
                             @endphp
 
                             <li>
-                                <a href="/cart" class="nav-item nav-link active badge-pill"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                <a href="/cart/{{ __('lang.en')}}" class="nav-item nav-link active badge-pill"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
                             </li>
                         @endguest
                     </ul>

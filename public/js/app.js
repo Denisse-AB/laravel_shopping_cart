@@ -2133,9 +2133,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    itemId: String
+    itemId: String,
+    lang: String
   },
   data: function data() {
     return {
@@ -2144,7 +2150,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      axios["delete"]('/item/' + this.itemId, {
+      axios["delete"]("/item/".concat(this.itemId), {
         method: 'DELETE'
       })["catch"](function (error) {
         if (error.response.status == 401) {
@@ -2539,7 +2545,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     itemId: String,
-    checkdb: String
+    checkdb: String,
+    lang: String
   },
   data: function data() {
     return {
@@ -2550,7 +2557,7 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
-      axios.post('/saveForLater/' + this.itemId).then(function (response) {
+      axios.post("/saveForLater/".concat(this.itemId)).then(function (_response) {
         _this.status = !_this.status;
       })["catch"](function (errors) {
         if (errors.response.status == 401) {
@@ -2563,7 +2570,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     buttonText: function buttonText() {
-      return this.status ? 'Item save in wishlist' : 'Save for Later'; //? ternary operator js (if or else statement)
+      if (this.lang == 'en') {
+        return this.status ? 'Item save in wishlist' : 'Save for Later';
+      } else {
+        return this.status ? 'Producto en tu lista' : 'Guardar en tu lista';
+      }
     },
     isDisabled: function isDisabled() {
       if (this.status == true) {
@@ -39215,14 +39226,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("form", { on: { submit: _vm.submit } }, [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-danger btn-sm float-right m-2",
-        attrs: { type: "submit", value: "submit" }
-      },
-      [_vm._v("Remove")]
-    )
+    _vm.lang == "es"
+      ? _c("div", [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger btn-sm float-right m-2",
+              attrs: { type: "submit", value: "submit" }
+            },
+            [_vm._v("Remover")]
+          )
+        ])
+      : _c("div", [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger btn-sm float-right m-2",
+              attrs: { type: "submit", value: "submit" }
+            },
+            [_vm._v("Remove")]
+          )
+        ])
   ])
 }
 var staticRenderFns = []

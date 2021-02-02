@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'en' => 'en',
     'home' => 'Home',
     'wishlist' => 'Wishlist',
     'lang' => 'Español',

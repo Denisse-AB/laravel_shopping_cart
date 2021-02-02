@@ -48,12 +48,12 @@
                                             {{ number_format($itemTotal, 2) }}
                                         </span></small></p>
                                         {{-- Vue --}}
-                                            <delete-item item-id="{{ $item->id }}"></delete-item>
+                                            <delete-item item-id="{{ $item->id }}" lang="{{ __('lang.en')}}"></delete-item>
                                         @auth
                                             {{-- vue --}}
-                                            <save-item item-id="{{ $item->id }}" checkdb="{{ $checkdb }}"></save-item>
+                                            <save-item item-id="{{ $item->id }}" checkdb="{{ $checkdb }}" lang="{{ __('lang.en')}}"></save-item>
                                         @else
-                                            <button class="btn btn-secondary btn-sm float-right m-2" data-toggle="modal" data-target="#login">save for later</button>
+                                            <button class="btn btn-secondary btn-sm float-right m-2" data-toggle="modal" data-target="#login">{{ __('save for later')}}</button>
                                         @endauth
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
         {{-- subTotal --}}
         <div class="col-md-4">
             <div class="card">
-                <h5 class="card-header text-center">Your Items!</h5>
+                <h5 class="card-header text-center">{{ __('Your Items')}}!</h5>
                 <div class="card-body">
                     <h5 class="card-text"><small class="font-weight-bold">Subtotal: </small>
                     <small class="float-right"><span>
@@ -83,12 +83,13 @@
                         @endif
 
                     </span></small></h5>
-                    <p class="card-text text-muted">Shipping will be determing in next page.</p>
+                    <p class="card-text text-muted">{{ __('Shipping will be determing in next page')}}.</p>
 
                     @guest
-                        <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#login">Proceed to checkout</button>
+                        <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#login">{{ __('Proceed to checkout')}}</button>
                     @else
-                        <a href="/checkout" type="button" class="btn btn-outline-secondary btn-block" role="button">Proceed to checkout</a>
+                    {{-- TODO: LAST TRANSLATION PAGE --}}
+                        <a href="/checkout" type="button" class="btn btn-outline-secondary btn-block" role="button">{{ __('Proceed to checkout')}}</a>
                     @endguest
 
                     <!-- Modal -->
@@ -96,7 +97,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="loginLabel">Log In</h5>
+                                    <h5 class="modal-title" id="loginLabel">@lang('lang.login')</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -140,7 +141,7 @@
                                             <div class="form-group row mb-0">
                                                 <div class="">
                                                     <button type="submit" class="btn btn-primary">
-                                                        {{ __('Login') }}
+                                                        {{ __('lang.login') }}
                                                     </button>
 
                                                     @if (Route::has('password.request'))
@@ -151,7 +152,7 @@
                                                 </div>
 
                                                 <div class="row ml-5 pt-2">
-                                                    <a href="{{ route('register') }}">Register</a>
+                                                    <a href="{{ route('register') }}">@lang('lang.signup')</a>
                                                 </div>
                                             </div>
                                         </div>
