@@ -18,31 +18,30 @@
         <div class="container-fluid text-center">
             <div class="row padding">
                 <div class="col-md-4">
-                    <h4>You will find Us</h4>
-                    {{-- <a class="navbar-brand" href="#"><img src="\images\example_logo.png" alt="" style="width: 100px;"></a> --}}
+                    <h4>@lang('You will find Us')</h4>
                     <hr class="light">
                     <p>787-000-0000</p>
                     <p>Email: example@yahoo.com</p>
-                    <p>Phisical adress</p>
+                    <p>@lang('Phisical adress')</p>
                     <p>#00 str. name</p>
                     <p>city, country 0000</p>
                 </div>
 
                 <div class="col-md-4">
-                    <h4>Hours of services</h4>
+                    <h4>@lang('Hours of services')</h4>
                     <hr class="light">
-                    <p>Mon-Fri: 8-5</p>
-                    <p>Sat: 9-1</p>
-                    <p>Sun: closed</p>
+                    <p>@lang('Mon-Fri'): 8-5</p>
+                    <p>@lang('Sat'): 9-1</p>
+                    <p>@lang('Sun: closed')</p>
                 </div>
 
                 <div class="col-md-4">
-                    <h4>Service Areas</h4>
+                    <h4>@lang('Service Areas')</h4>
                     <hr class="light">
-                    <p>City State, 0000</p>
-                    <p>City State, 0000</p>
-                    <p>City State, 0000</p>
-                    <p>City State, 0000</p>
+                    <p>@lang('City State'), 0000</p>
+                    <p>@lang('City State'), 0000</p>
+                    <p>@lang('City State'), 0000</p>
+                    <p>@lang('City State'), 0000</p>
                 </div>
             </div>
         </div>

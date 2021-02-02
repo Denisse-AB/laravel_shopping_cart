@@ -25,7 +25,7 @@
                             <h5 class="card-title text-center p-2">{{ $item->name }}</h5>
                             <h5 class="text-center font-weight-bold p-2">${{ $item->price }}</h5>
                             <p class="card-text">{{ $item->description }}</p>
-                            <a href="/items/{{ $item->id }}" class="btn btn-secondary btn-block">Add to cart</a>
+                            <a href="/items/{{ $item->id }}" class="btn btn-secondary btn-block">@lang('lang.cart')</a>
                         </div>
                     </div>
                 </div>

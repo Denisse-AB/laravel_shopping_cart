@@ -1,6 +1,8 @@
 <?php
 
+use App\Items;
 use App\Mail\ReceiptMail;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Sample\CaptureIntentExamples\CreateOrder;
 
@@ -18,6 +20,12 @@ use Sample\CaptureIntentExamples\CreateOrder;
 //email view.
 Route::get('/email', function() {
     return new ReceiptMail();
+});
+
+Route::get('/lang/{lang}', function ($lang) {
+    App::setlocale($lang);
+    $items = Items::all()->shuffle();
+    return view('index', compact('items'));
 });
 
 Route::get('/', 'ItemsController@index')->name('items.index');

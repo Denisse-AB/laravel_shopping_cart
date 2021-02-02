@@ -37,8 +37,19 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <a class="nav-item nav-link active badge-pill" href="{{ url('/') }}">Home</a>
-                        <a class="nav-item nav-link active badge-pill" href="/wishlist">Wishlist</a>
+                        @php $locale = session()->get('locale'); @endphp
+                        <a class="nav-item nav-link active badge-pill" href="{{ url('/') }}">@lang('lang.home')</a>
+                        <a class="nav-item nav-link active badge-pill" href="/wishlist">@lang('lang.wishlist')</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="language" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" v-pre>
+                                @lang('lang.lang')
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="language">
+                                <a class="dropdown-item" href={{ url('lang/en') }}>English</a>
+                                <a class="dropdown-item" href={{ url('lang/es') }}>Español</a>
+                            </div>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -46,11 +57,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link active badge-pill" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link active badge-pill" href="{{ route('login') }}">@lang('lang.login')</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link active badge-pill" href="{{ route('register') }}">{{ __('SingUp') }}</a>
+                                    <a class="nav-link active badge-pill" href="{{ route('register') }}">@lang('lang.signup')</a>
                                 </li>
                             @endif
 
@@ -77,15 +88,15 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        @lang('lang.logout')
                                     </a>
 
                                     <a class="dropdown-item" href="/account">
-                                        Account
+                                        @lang('lang.account')
                                     </a>
 
                                     <a class="dropdown-item" href="/checkout">
-                                        Checkout
+                                        @lang('lang.checkout')
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
