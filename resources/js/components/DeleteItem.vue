@@ -1,12 +1,7 @@
 <template>
 
     <form @submit="submit">
-        <div v-if="lang == 'es'">
-            <button type="submit" value='submit' class="btn btn-danger btn-sm float-right m-2">Remover</button>
-        </div>
-        <div v-else>
-            <button type="submit" value='submit' class="btn btn-danger btn-sm float-right m-2">Remove</button>
-        </div>
+        <button type="submit" value='submit' class="btn btn-danger btn-sm float-right m-2" v-text="text"></button>
     </form>
 
 </template>
@@ -36,7 +31,12 @@ export default {
                 }
             });
         }
-    }
+    },
 
+    computed: {
+        text () {
+            return (this.lang == 'es') ? 'Remover' :'Remove' ;
+        }
+    }
 }
 </script>

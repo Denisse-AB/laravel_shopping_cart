@@ -38,9 +38,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <a class="nav-item nav-link active badge-pill" href="{{ url('/') }}">@lang('lang.home')</a>
-                        <a class="nav-item nav-link active badge-pill" href="/wishlist">@lang('lang.wishlist')</a>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="language" role="button" data-toggle="dropdown"
+                        <a class="nav-item nav-link active badge-pill" href="/wishlist/{{ __('lang.en')}}">@lang('lang.wishlist')</a>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle badge-pill" id="language" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false" v-pre>
                                 @lang('lang.lang')
                             </a>
@@ -55,6 +55,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+                        
                             <li class="nav-item">
                                 <a class="nav-link active badge-pill" href="{{ route('login') }}">@lang('lang.login')</a>
                             </li>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Items;
 use App\SaveForLater;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class SaveForLaterController extends Controller
@@ -32,9 +33,11 @@ class SaveForLaterController extends Controller
         return response()->json(200);
     }
 
-    public function show(Request $request)
+    public function show(Request $request, $lang)
     {
        $user = Auth::user()->id;
+
+       App::setlocale($lang);
 
        $wishlists = SaveForLater::where('user_id', $user)->select('item_id')->get();
 
