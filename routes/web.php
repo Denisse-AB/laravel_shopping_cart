@@ -40,7 +40,9 @@ Route::delete('/item/{id}', 'SessionController@delete')->name('item.destroy');
 
 Auth::routes();
 
-Route::get('/wishlist', 'SaveForLaterController@show')->name('wishlist.show');
+Route::post('/login/{lang}', 'LoginController@authenticate')->name('user.auth');
+
+Route::get('/wishlist/{lang}', 'SaveForLaterController@show')->name('wishlist.show');
 
 Route::get('/account/{lang}', 'UserController@show')->name('account.show');
 

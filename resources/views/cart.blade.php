@@ -88,10 +88,10 @@
                     @guest
                         <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#login">{{ __('Proceed to checkout')}}</button>
                     @else
-                    
+
                         <a href="/checkout/{{ __('lang.en')}}" type="button" class="btn btn-outline-secondary btn-block" role="button">{{ __('Proceed to checkout')}}</a>
                     @endguest
-
+                    {{-- FIXME: FIX ROMPIO EL AUTH ROUTE--}}
                     <!-- Modal -->
                     <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -104,7 +104,7 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <form method="POST" action="{{ route('login') }}">
+                                    <form method="POST" action="/login/{{ __('lang.en')}}">
                                         @csrf
 
                                         <div class="form-group row">
@@ -140,6 +140,7 @@
                                         <div class="modal-footer float-left">
                                             <div class="form-group row mb-0">
                                                 <div class="">
+
                                                     <button type="submit" class="btn btn-primary">
                                                         {{ __('lang.login') }}
                                                     </button>
