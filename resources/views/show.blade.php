@@ -102,5 +102,5 @@
     </div>
     @endauth
 @endsection
-
+@extends('layouts.loginModal')
 @extends('layouts.footer')

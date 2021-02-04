@@ -12,8 +12,8 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
-    <script src="{{ asset('js/client.js') }}" defer></script>
-    <script src="https://js.stripe.com/v3/"></script>
+    {{-- <script src="{{ asset('js/client.js') }}" defer></script> --}}
+    {{-- <script src="https://js.stripe.com/v3/"></script> --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -55,13 +55,11 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                        
-                            <li class="nav-item">
-                                <a class="nav-link active badge-pill" href="{{ route('login') }}">@lang('lang.login')</a>
-                            </li>
+                            <button class="btn btn-outline-light badge-pill my-2 my-sm-0" data-toggle="modal" data-target="#login">@lang('lang.login')</button>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link active badge-pill" href="{{ route('register') }}">@lang('lang.signup')</a>
+                                    @php $lang = __('lang.en'); @endphp
+                                    <a class="nav-link active badge-pill" href="{{ route('register',['lang'=> $lang]) }}">@lang('lang.signup')</a>
                                 </li>
                             @endif
 
@@ -125,6 +123,10 @@
 
         <main class="py-4">
             @yield('content')
+        </main>
+
+        <main class="py-4">
+            @yield('loginModal')
         </main>
 
         <section>
