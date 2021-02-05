@@ -26,9 +26,16 @@ class LoginController extends Controller
             return redirect()->intended('/checkout/'. $lang);
         }
 
+        if ($lang === 'en') {
+            $message = 'The provided credentials do not match our records.';
+        } else {
+            $message = 'Tus credenciales no concuerdan con nuestros datos.';
+        }
+
+
         return back()->withErrors([
-            // TODO: IF FOR LANG. 
-            'email' => 'The provided credentials do not match our records.',
+
+            'email' => $message,
         ]);
     }
 }

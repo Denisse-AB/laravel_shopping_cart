@@ -6,13 +6,13 @@ return [
     'wishlist' => 'Tu Lista',
     'lang' => 'English',
     'login' => 'Entrar',
-    'signup' => 'Inscribete',
+    'signup' => 'Inscríbete',
     'logout' => 'Salir',
     'account' => 'Tu Cuenta',
     'checkout' => 'Pagar',
     'cart' => 'Añade al Carrito',
     'remove' => 'Remover',
-    'shipping' => 'Envio'
+    'shipping' => 'Envío'
 
 ]
 
