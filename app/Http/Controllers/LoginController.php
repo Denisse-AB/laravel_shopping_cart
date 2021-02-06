@@ -14,19 +14,17 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function authenticate(Request $request, $lang)
+    public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
-        App::setlocale($lang);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/checkout/'. $lang);
+            return redirect()->intended('/checkout');
         }
 
-        if ($lang === 'en') {
+        if (session('locale') === 'en') {
             $message = 'The provided credentials do not match our records.';
         } else {
             $message = 'Tus credenciales no concuerdan con nuestros datos.';

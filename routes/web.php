@@ -2,6 +2,7 @@
 
 use App\Items;
 use App\Mail\ReceiptMail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Sample\CaptureIntentExamples\CreateOrder;
@@ -23,35 +24,39 @@ Route::get('/email', function() {
 });
 
 Route::get('/lang/{lang}', function ($lang) {
-    App::setlocale($lang);
+    if (! in_array($lang, ['en', 'es'])) {
+        abort(400);
+    }
+    App::setLocale($lang);
+
+    session()->put('locale', $lang);
+
     $items = Items::all()->shuffle();
+
     return view('index', compact('items'));
 });
 
 Route::get('/', 'ItemsController@index')->name('items.index');
 
-Route::get('/items/{item}/{lang}', 'ItemsController@show')->name('items.show');
+Route::get('/items/{item}', 'ItemsController@show')->name('items.show');
 
-Route::post('/item/{item_id}/{lang}', 'SessionController@store')->name('items.store');
+Route::post('/item/{item_id}', 'SessionController@store')->name('items.store');
 
-Route::get('/cart/{lang}', 'SessionController@show')->name('cart.show');
+Route::get('/cart', 'SessionController@show')->name('cart.show');
 
 Route::delete('/item/{id}', 'SessionController@delete')->name('item.destroy');
 
 Auth::routes();
 
-Route::post('/login/{lang}', 'LoginController@authenticate')->name('user.auth');
+Route::post('/login', 'LoginController@authenticate')->name('user.auth');
 
-Route::get('/wishlist/{lang}', 'SaveForLaterController@show')->name('wishlist.show');
+Route::get('/wishlist', 'SaveForLaterController@show')->name('wishlist.show');
 
-Route::get('/account/{lang}', 'UserController@show')->name('account.show');
+Route::get('/account', 'UserController@show')->name('account.show');
 
-Route::get('/checkout/{lang}', 'CheckoutController@show')->name('checkout.show');
+Route::post('stripe/webhook','\App\Http\Controllers\WebhookController@handleWebhook');
 
-Route::post(
-    'stripe/webhook',
-    '\App\Http\Controllers\WebhookController@handleWebhook'
-);
+Route::get('/checkout', 'CheckoutController@show')->name('checkout.show');
 
 Route::put('/passwordEdit/{user_id}', 'UserController@put')->name('password.update');
 

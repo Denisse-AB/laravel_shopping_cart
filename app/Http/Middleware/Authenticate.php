@@ -15,10 +15,10 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            if ($request->getPathInfo() == "/wishlist/es") {
-                return route('login', ['lang' => 'es']);
+            if (session('locale') === 'es') {
+                return route('login');
             } else {
-                return route('login', ['lang' => 'en']);
+                return route('login');
             }
         }
     }

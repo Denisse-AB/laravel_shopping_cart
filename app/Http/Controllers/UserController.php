@@ -9,7 +9,6 @@ use Laravel\Cashier\Cashier;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
 use App\Http\Requests\EditUserInfo;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -22,11 +21,9 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function show(Request $request, $lang)
+    public function show(Request $request)
     {
         $auth = $request->user()->id;
-
-        App::setlocale($lang);
 
         $user = User::where('id', $auth)->get();
 
@@ -73,9 +70,15 @@ class UserController extends Controller
 
         } else {
 
+            if (session('locale') === 'en') {
+                $message = 'Your password is incorrect.';
+            } else {
+                $message = 'Tu password está incorrecto.';
+            }
+
             return response()->json([
                 'error' => 403,
-                'pwdErr' => 'Your password is incorrect.'
+                'pwdErr' => $message
             ]);
         }
     }

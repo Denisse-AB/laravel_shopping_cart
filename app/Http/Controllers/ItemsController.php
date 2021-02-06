@@ -11,16 +11,19 @@ class ItemsController extends Controller
 {
     public function index()
     {
+        // Initial localization in spanish according to config.
+        App::setLocale('es');
+
+        session()->put('locale', 'es');
+
         $items = Items::all()->shuffle();
 
         return view('index', compact('items'));
     }
 
-    public function show($item, $lang)
+    public function show($item)
     {
         $items = Items::where('id', $item)->first();
-
-        App::setlocale($lang);
 
         $comments = Comments::where('item_id', $item)
             ->select('name', 'comment', 'created_at')

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Items;
 use App\SaveForLater;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class SaveForLaterController extends Controller
@@ -21,6 +20,7 @@ class SaveForLaterController extends Controller
     public function store(Request $request, Items $item)
     {
         $user = Auth::user()->id;
+
         $id = $item->id;
 
         $db = auth()->user()->saveForLater()->create([
@@ -33,11 +33,9 @@ class SaveForLaterController extends Controller
         return response()->json(200);
     }
 
-    public function show(Request $request, $lang)
+    public function show(Request $request)
     {
        $user = Auth::user()->id;
-
-       App::setlocale($lang);
 
        $wishlists = SaveForLater::where('user_id', $user)->select('item_id')->get();
 
@@ -65,10 +63,18 @@ class SaveForLaterController extends Controller
         $saveForLater = SaveForLater::where('user_id', $user)->get();
 
        if ($saveForLater->count() == 0) {
-            return redirect()->back()->with('status', 'Success, Your wishlist is empty!');
+            if (session('locale') === 'en') {
+                $message = 'Success, Your wishlist is empty!';
+                $message2 = 'Success, Item deleted!';
+            } else {
+                $message = 'Muy bien, Has vaciado tu wishlist!';
+                $message2 = 'Muy bien, Borraste el producto!';
+            }
+
+            return redirect()->back()->with('status', $message);
 
         } else {
-            return redirect()->back()->with('status', 'Success, Item deleted!');
+            return redirect()->back()->with('status', $message2);
 
         }
     }

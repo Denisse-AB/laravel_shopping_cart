@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 use Laravel\Cashier\Cashier;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\App;
 use Stripe\Exception\CardException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -36,12 +35,10 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function show(Request $request, $lang)
+    public function show(Request $request)
     {
         $user = Auth::user();
         $cart = session()->get('cart');
-
-        App::setlocale($lang);
 
         if (!$cart) {
 

@@ -16,13 +16,13 @@ class CommentsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');   
+        $this->middleware('auth');
     }
 
     public function show($item)
     {
         $comments = Comments::where('item_id', $item)->latest()->get();
-        
+
         $replies = Replies::all();
 
         return response()->json([
@@ -40,27 +40,26 @@ class CommentsController extends Controller
     public function store(Request $request, $item)
     {
         $request->validate([
-            'comment' => ['required', 'not_regex:([<>+/])', 'max:300'], //not_regex:/^.+$/i' <> 
+            'comment' => ['required', 'not_regex:([<>+/])', 'max:300'], //not_regex:/^.+$/i' <>
         ]);
 
         $user = Auth::user()->id;
         $name = Auth::user()->name;
 
         $comment = $request->comment;
-   
+
         $post = auth()->user()->comments()->create([
             'item_id' => $item,
             'user_id' => $user,
             'name' => $name,
             'comment' => $comment,
         ]);
-            
+
         return response()->json($post);
     }
 
     public function delete($comment_id)
     {
-        // Eloquent Query
         auth()->user()->comments()->where('id', $comment_id)->delete();
 
         return response()->json(200);
@@ -69,14 +68,14 @@ class CommentsController extends Controller
     public function update(Request $request, $comment_id)
     {
         $request->validate([
-            'text' => ['required', 'not_regex:([<>+/])', 'max:300'], //not_regex:/^.+$/i' <> 
+            'text' => ['required', 'not_regex:([<>+/])', 'max:300'], //not_regex:/^.+$/i' <>
         ]);
 
         $comment = Comments::find($comment_id);
 
         $text = $request->text;
 
-        $comment->comment = $text; 
+        $comment->comment = $text;
 
         $comment->save();
 
