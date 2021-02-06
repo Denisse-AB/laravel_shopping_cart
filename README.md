@@ -6,8 +6,9 @@ Stripe ready Shopping Cart with Laravel 8 and Vue.js.
 
 - Stripe v3
 - Login system
-- Comments area per Item
 - Wishlist area
+- Comments area per product
+- Localization english and spanish
 - Stripe integration check passed :heavy_check_mark:
 
 ---
