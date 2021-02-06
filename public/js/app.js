@@ -2002,7 +2002,8 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     user: String,
     userId: String,
-    itemId: String
+    itemId: String,
+    lang: String
   },
   components: {
     ModalComponent: _ModalComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -2027,7 +2028,7 @@ __webpack_require__.r(__webpack_exports__);
     fetch: function fetch() {
       var _this = this;
 
-      axios.get('/comments/' + this.itemId).then(function (response) {
+      axios.get("/comments/".concat(this.itemId)).then(function (response) {
         _this.commentsData = response.data.comments;
         _this.commentsData = _.orderBy(response.data.comments, ['created_at'], ['desc']);
         _this.repliesData = response.data.replies;
@@ -2039,7 +2040,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.errors = {};
-      axios.post('/comment/' + this.itemId, {
+      axios.post("/comment/".concat(this.itemId), {
         comment: this.text
       }).then(function (response) {
         _this2.text = '';
@@ -2056,7 +2057,7 @@ __webpack_require__.r(__webpack_exports__);
     Delete: function Delete(row_id) {
       var _this3 = this;
 
-      axios["delete"]('/deleteComment/' + row_id, {
+      axios["delete"]("/deleteComment/".concat(row_id), {
         method: 'DELETE'
       }).then(function (response) {
         if (response.data == 200) {
@@ -2078,7 +2079,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       this.errors = {};
-      axios.post('/reply/' + row_id, {
+      axios.post("/reply/".concat(row_id), {
         reply: this.replyText
       }).then(function (response) {
         _this4.replyText = '';
@@ -2096,7 +2097,7 @@ __webpack_require__.r(__webpack_exports__);
     DeleteReply: function DeleteReply(replies_id) {
       var _this5 = this;
 
-      axios["delete"]('/deleteReply/' + replies_id, {
+      axios["delete"]("/deleteReply/".concat(replies_id), {
         method: 'DELETE'
       }).then(function (response) {
         if (response.data == 200) {
@@ -2109,7 +2110,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     buttonText: function buttonText() {
-      return this.replyBox && this.rowId ? 'Close' : 'Reply';
+      if (this.lang == 'es') {
+        return this.replyBox && this.rowId ? 'Cerrar' : 'Responder';
+      } else {
+        return this.replyBox && this.rowId ? 'Close' : 'Reply';
+      }
+    },
+    send: function send() {
+      return this.lang == 'es' ? 'Enviar' : 'Send';
+    },
+    edit: function edit() {
+      return this.lang == 'es' ? 'Editar' : 'Edit';
     }
   }
 });
@@ -2192,7 +2203,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      axios["delete"]('/wishlist/' + this.itemId, {
+      axios["delete"]("/wishlist/".concat(this.itemId), {
         method: 'DELETE'
       })["catch"](function (error) {
         if (error.response.status == 401) {
@@ -2371,8 +2382,14 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         if (response.status === 200 || {}) {
           _this.show = false;
-          alert('Success, Your credentials has change.');
-          window.location.reload();
+
+          if (_this.lang === 'es') {
+            alert('Muy Bien! Has cambiado tus credenciales.');
+            window.location.reload();
+          } else {
+            alert('Success, Your credentials has change.');
+            window.location.reload();
+          }
         }
       })["catch"](function (error) {
         if (error.response.status === 422) {
@@ -2405,8 +2422,13 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data.error === 403) {
           _this2.pwdErr = response.data.pwdErr;
         } else if (response.status === 200) {
-          alert('Password change');
-          window.location.reload();
+          if (_this2.lang === 'es') {
+            alert('Password Cambiado!');
+            window.location.reload();
+          } else {
+            alert('Password Change!');
+            window.location.reload();
+          }
         } else {
           alert('Server error try again later!');
         }
@@ -2511,9 +2533,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    commentId: String
-  },
+  props: ['commentId', 'lang'],
   data: function data() {
     return {
       text: '',
@@ -2525,7 +2545,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.errors = {};
-      axios.patch('/update/' + this.commentId, {
+      axios.patch("/update/".concat(this.commentId), {
         method: 'PATCH',
         text: this.text
       }).then(function (response) {
@@ -2540,6 +2560,14 @@ __webpack_require__.r(__webpack_exports__);
           alert('There was an error editing your comment!');
         }
       });
+    }
+  },
+  computed: {
+    title: function title() {
+      return this.lang == 'es' ? 'Edita tu commentario' : 'Edit your Comment';
+    },
+    editButton: function editButton() {
+      return this.lang == 'es' ? 'Editar' : 'Edit';
     }
   }
 });
@@ -38991,15 +39019,12 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-secondary btn-sm m-2 float-right",
-            attrs: { type: "button" },
-            on: { click: _vm.submit }
-          },
-          [_vm._v("Send")]
-        )
+        _c("button", {
+          staticClass: "btn btn-secondary btn-sm m-2 float-right",
+          attrs: { type: "button" },
+          domProps: { textContent: _vm._s(_vm.send) },
+          on: { click: _vm.submit }
+        })
       ]),
       _vm._v(" "),
       _vm._l(_vm.commentsData, function(row) {
@@ -39054,23 +39079,20 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-secondary btn-sm m-1",
-                      attrs: {
-                        type: "button",
-                        "data-toggle": "modal",
-                        "data-target": "#exampleModal"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.modal(row.id)
-                        }
-                      }
+                  _c("button", {
+                    staticClass: "btn btn-secondary btn-sm m-1",
+                    attrs: {
+                      type: "button",
+                      "data-toggle": "modal",
+                      "data-target": "#exampleModal"
                     },
-                    [_vm._v("Edit")]
-                  ),
+                    domProps: { textContent: _vm._s(_vm.edit) },
+                    on: {
+                      click: function($event) {
+                        return _vm.modal(row.id)
+                      }
+                    }
+                  }),
                   _vm._v(" "),
                   _c(
                     "button",
@@ -39219,7 +39241,9 @@ var render = function() {
         )
       }),
       _vm._v(" "),
-      _c("modal-component", { attrs: { commentId: _vm.commentId } })
+      _c("modal-component", {
+        attrs: { commentId: _vm.commentId, lang: _vm.lang }
+      })
     ],
     2
   )
@@ -40248,7 +40272,15 @@ var render = function() {
     [
       _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
         _c("div", { staticClass: "modal-content" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "modal-header" }, [
+            _c("h5", {
+              staticClass: "modal-title",
+              attrs: { id: "exampleModalLabel" },
+              domProps: { textContent: _vm._s(_vm.title) }
+            }),
+            _vm._v(" "),
+            _vm._m(0)
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "modal-body" }, [
             _c("textarea", {
@@ -40286,15 +40318,12 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "modal-footer" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-secondary btn-sm",
-                attrs: { type: "button" },
-                on: { click: _vm.edit }
-              },
-              [_vm._v("Edit")]
-            )
+            _c("button", {
+              staticClass: "btn btn-secondary btn-sm",
+              attrs: { type: "button" },
+              domProps: { textContent: _vm._s(_vm.editButton) },
+              on: { click: _vm.edit }
+            })
           ])
         ])
       ])
@@ -40306,26 +40335,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Edit Your Comment")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true

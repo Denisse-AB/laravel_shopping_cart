@@ -134,7 +134,7 @@
                 </div>
                 {{-- Personal info --}}
                 <div class="card mt-2">
-                <h5 class="card-header text-center">{{ __('Your Info')}} <a class="float-right text-decoration-none text-body" href="/account/{{ __('lang.en')}}"><span><i class="fas fa-cog"></i></a></span></h5>
+                <h5 class="card-header text-center">{{ __('Your Info')}} <a class="float-right text-decoration-none text-body" href="/account"><span><i class="fas fa-cog"></i></a></span></h5>
                     <div class="card-body">
                         <p class="pb-2">{{ $user->name }} <span class="float-right">{{ $user->email }}</span></p>
                         <hr>

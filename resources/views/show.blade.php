@@ -77,6 +77,7 @@
                 user='{{ Auth::user()->name }}'
                 user-id ='{{ Auth::user()->id }}'
                 item-id='{{ $items->id }}'
+                lang='{{ __('lang.en')}}'
             ></comments-area>
             {{-- end --}}
         </div>

@@ -4,7 +4,7 @@
         <h5>{{ user }}</h5>
         <textarea id="textarea" v-model="text" :class="{'form-control' : 'true', 'is-invalid' : errors.comment}" rows="3" type="text" maxlength="300"></textarea>
         <div v-if="errors && errors.comment" class="text-danger">{{ errors.comment[0] }}</div>
-        <button @click="submit" class="btn btn-secondary btn-sm m-2 float-right" type="button">Send</button>
+        <button @click="submit" class="btn btn-secondary btn-sm m-2 float-right" type="button" v-text="send"></button>
     </div>
     <!-- comments -->
     <div v-for="row in commentsData" :key="row.id" class="col-md-12 mt-1">
@@ -25,7 +25,7 @@
         </transition>
         <div v-if="userId == row.user_id" class="row ml-2">
             <button @click="replyArea(row.id)" class="btn btn-secondary btn-sm m-1 ml-3" type="button" v-text="buttonText"></button>
-            <button @click="modal(row.id)" class="btn btn-secondary btn-sm m-1" type="button" data-toggle="modal" data-target="#exampleModal">Edit</button>
+            <button @click="modal(row.id)" class="btn btn-secondary btn-sm m-1" type="button" data-toggle="modal" data-target="#exampleModal" v-text="edit"></button>
             <button @click="Delete(row.id)" class="btn btn-danger btn-sm m-1" type="button">Delete</button>
         </div>
         <div v-else class="row ml-2">
@@ -52,7 +52,7 @@
             </div>
         </div>
     </div>
-        <modal-component v-bind:commentId="commentId"></modal-component>
+        <modal-component v-bind:commentId="commentId" v-bind:lang="lang"></modal-component>
 </div>
 </template>
 
@@ -64,7 +64,8 @@ export default {
     props: {
         user: String,
         userId: String,
-        itemId: String
+        itemId: String,
+        lang: String
     },
 
     components : {
@@ -93,11 +94,8 @@ export default {
         fetch(){
             axios.get(`/comments/${this.itemId}` )
             .then(response => {
-
                 this.commentsData = response.data.comments;
-
                 this.commentsData = _.orderBy(response.data.comments, ['created_at'], ['desc']);
-
                 this.repliesData = response.data.replies;
             })
             .catch(error => {
@@ -111,9 +109,7 @@ export default {
                 comment: this.text,
             })
             .then(response => {
-
                 this.text = '';
-
                 this.fetch();
             })
             .catch(error => {
@@ -140,16 +136,12 @@ export default {
         },
 
         modal(row_id){
-
             this.commentId = row_id;
-
             this.ModalComponent = true;
         },
 
         replyArea(row_id){
-
             this.rowId = row_id;
-
             this.replyBox = !this.replyBox;
         },
 
@@ -159,13 +151,9 @@ export default {
                 reply: this.replyText,
             })
             .then(response => {
-
                 this.replyText = '';
-
                 this.replyBox = false;
-
                 this.fetch();
-
             })
             .catch(error => {
                 if (error.response.status === 422) {
@@ -193,7 +181,17 @@ export default {
 
     computed: {
         buttonText(){
-            return (this.replyBox && this.rowId) ? 'Close' : 'Reply';
+            if (this.lang == 'es') {
+                return (this.replyBox && this.rowId) ? 'Cerrar' : 'Responder'
+            } else {
+                return (this.replyBox && this.rowId) ? 'Close' : 'Reply'
+            }
+        },
+        send () {
+            return (this.lang == 'es') ? 'Enviar' : 'Send'
+        },
+        edit () {
+            return (this.lang == 'es') ? 'Editar' : 'Edit'
         }
     }
 }

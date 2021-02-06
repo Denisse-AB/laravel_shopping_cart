@@ -3,7 +3,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Your Comment</h5>
+        <h5 class="modal-title" id="exampleModalLabel" v-text="title"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -13,7 +13,7 @@
             <div v-if="errors && errors.text" class="text-danger">{{ errors.text[0] }}</div>
       </div>
       <div class="modal-footer">
-        <button @click="edit" type="button" class="btn btn-secondary btn-sm">Edit</button>
+        <button @click="edit" type="button" class="btn btn-secondary btn-sm" v-text="editButton"></button>
       </div>
     </div>
   </div>
@@ -23,9 +23,7 @@
 <script>
 export default {
 
-    props: {
-      commentId: String
-    },
+    props: ['commentId', 'lang'],
 
     data(){
         return {
@@ -55,6 +53,15 @@ export default {
             });
 
         }
+    },
+
+    computed: {
+      title () {
+        return (this.lang == 'es') ? 'Edita tu commentario' : 'Edit your Comment'
+      },
+      editButton () {
+        return (this.lang == 'es') ? 'Editar' : 'Edit'
+      }
     }
 
 }

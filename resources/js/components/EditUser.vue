@@ -155,8 +155,13 @@ export default {
             .then(response => {
                 if (response.status === 200 || {} ) {
                     this.show = false;
-                    alert('Success, Your credentials has change.');
-                    window.location.reload();
+                    if (this.lang === 'es') {
+                        alert('Muy Bien! Has cambiado tus credenciales.');
+                        window.location.reload();
+                    } else {
+                        alert('Success, Your credentials has change.');
+                        window.location.reload();
+                    }
                 }
             })
             .catch(error => {
@@ -191,11 +196,14 @@ export default {
             .then(response => {
                 if (response.data.error === 403) {
                     this.pwdErr = response.data.pwdErr;
-
                 } else if (response.status === 200) {
-                    alert('Password change');
-
-                    window.location.reload();
+                    if (this.lang === 'es') {
+                        alert('Password Cambiado!');
+                        window.location.reload();
+                    } else {
+                        alert('Password Change!');
+                        window.location.reload();
+                    }
                 } else {
                     alert('Server error try again later!');
                 }

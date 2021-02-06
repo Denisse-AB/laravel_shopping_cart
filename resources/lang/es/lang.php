@@ -13,7 +13,6 @@ return [
     'cart' => 'Añade al Carrito',
     'remove' => 'Remover',
     'shipping' => 'Envío'
-
 ]
 
 ?>

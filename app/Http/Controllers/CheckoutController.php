@@ -45,10 +45,10 @@ class CheckoutController extends Controller
             return redirect('/');
         }
 
-        //query to find multiple items.
+        // query to find multiple items.
         $item_id = array_column(session('cart'), "itemId");
         $items = Items::find($item_id);
-
+        // calculations
         $item_subtotal = array_column(session('cart'), "subtotal");
         $subtotal = (array_sum($item_subtotal));
         $tax_rate = 0.115;

@@ -16,5 +16,6 @@
     "Forgot Your Password?" : "Olvidaste tu Password?",
     "Credit or debit card" : "Débito o Crédito",
     "Pay with Stripe" : "Paga con Stripe",
-    "Your Info" : "Tu Info"
+    "Your Info" : "Tu Info",
+    "noItems" : "No hay artículos en tu wishlist"
 }
