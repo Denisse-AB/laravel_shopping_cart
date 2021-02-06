@@ -6,7 +6,6 @@
     @if (session('status'))
 
         <div class="alert alert-info alert-dismissible fade show w-50 offset-3" role="alert">
-            }
             {{ session('status') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -52,7 +51,7 @@
                     <button type='button' name="minus" class='btn bg-light border rounded-circle minus'><i class='fas fa-minus'></i></button>
                 </div>
             </div>
-            <form action="/item/{{ $items->id }}/{{ __('lang.en')}}" method="POST">
+            <form action="/item/{{ $items->id }}" method="POST">
                 @csrf
                 <button type="submit" name="add" class="btn btn-outline-secondary mt-4 btn-block">@lang('lang.cart')</button>
                 <input type="hidden" name="itemId" value="{{ $items->id }}" required>

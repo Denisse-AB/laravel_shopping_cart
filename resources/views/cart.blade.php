@@ -41,20 +41,26 @@
                                     <div class="card-body">
                                     <h5 class="card-title">{{ $item->name }}</h5>
                                     <p class="card-text">{{ $item->description }}</p>
-                                        <p class="card-text"><small class="text-muted offset-2"><span>Qty:
-                                            {{ $qty }}
-                                        </span></small>
-                                        <small class="text-muted offset-2"><span>Total:
-                                            {{ number_format($itemTotal, 2) }}
-                                        </span></small></p>
+                                        <p class="card-text">
+                                            <small class="text-muted offset-2">
+                                                <span>Qty:
+                                                    {{ $qty }}
+                                                </span>
+                                             </small>
+                                        <small class="text-muted offset-2">
+                                            <span>Total:
+                                                {{ number_format($itemTotal, 2) }}
+                                            </span>
+                                        </small>
+                                    </p>
                                         {{-- Vue --}}
-                                            <delete-item item-id="{{ $item->id }}" lang="{{ __('lang.en')}}"></delete-item>
-                                        @auth
-                                            {{-- vue --}}
-                                            <save-item item-id="{{ $item->id }}" checkdb="{{ $checkdb }}" lang="{{ __('lang.en')}}"></save-item>
-                                        @else
-                                            <button class="btn btn-secondary btn-sm float-right m-2" data-toggle="modal" data-target="#login">{{ __('save for later')}}</button>
-                                        @endauth
+                                        <delete-item item-id="{{ $item->id }}" lang="{{ __('lang.en')}}"></delete-item>
+                                    @auth
+                                        {{-- vue --}}
+                                        <save-item item-id="{{ $item->id }}" checkdb="{{ $checkdb }}" lang="{{ __('lang.en')}}"></save-item>
+                                    @else
+                                        <button class="btn btn-secondary btn-sm float-right m-2" data-toggle="modal" data-target="#login">{{ __('save for later')}}</button>
+                                    @endauth
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +95,7 @@
                         <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#login">{{ __('Proceed to checkout')}}</button>
                     @else
 
-                        <a href="/checkout/{{ __('lang.en')}}" type="button" class="btn btn-outline-secondary btn-block" role="button">{{ __('Proceed to checkout')}}</a>
+                        <a href="/checkout" type="button" class="btn btn-outline-secondary btn-block" role="button">{{ __('Proceed to checkout')}}</a>
                     @endguest
                 </div>
             </div>

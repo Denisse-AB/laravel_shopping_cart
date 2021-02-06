@@ -38,7 +38,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <a class="nav-item nav-link active badge-pill" href="{{ url('/') }}">@lang('lang.home')</a>
-                        <a class="nav-item nav-link active badge-pill" href="/wishlist/{{ __('lang.en')}}">@lang('lang.wishlist')</a>
+                        <a class="nav-item nav-link active badge-pill" href="/wishlist">@lang('lang.wishlist')</a>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle badge-pill" id="language" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false" v-pre>
@@ -58,8 +58,7 @@
                             <button class="btn btn-outline-light badge-pill my-2 my-sm-0" data-toggle="modal" data-target="#login">@lang('lang.login')</button>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    @php $lang = __('lang.en'); @endphp
-                                    <a class="nav-link active badge-pill" href="{{ route('register',['lang'=> $lang]) }}">@lang('lang.signup')</a>
+                                    <a class="nav-link active badge-pill" href="{{ route('register') }}">@lang('lang.signup')</a>
                                 </li>
                             @endif
 
@@ -74,7 +73,7 @@
                             @endphp
 
                             <li>
-                                <a href="/cart/{{ __('lang.en')}}" class="nav-item nav-link active badge-pill"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                <a href="/cart" class="nav-item nav-link active badge-pill"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
@@ -89,11 +88,11 @@
                                         @lang('lang.logout')
                                     </a>
 
-                                    <a class="dropdown-item" href="/account/{{ __('lang.en')}}">
+                                    <a class="dropdown-item" href="/account">
                                         @lang('lang.account')
                                     </a>
 
-                                    <a class="dropdown-item" href="/checkout/{{ __('lang.en')}}">
+                                    <a class="dropdown-item" href="/checkout">
                                         @lang('lang.checkout')
                                     </a>
 
@@ -113,7 +112,7 @@
                             @endphp
 
                             <li>
-                                <a href="/cart/{{ __('lang.en')}}" class="nav-item nav-link active badge-pill"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                <a href="/cart" class="nav-item nav-link active badge-pill"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
                             </li>
                         @endguest
                     </ul>

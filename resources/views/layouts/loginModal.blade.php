@@ -10,7 +10,7 @@
             </div>
 
             <div class="modal-body">
-                <form method="POST" action="/login/{{ __('lang.en')}}">
+                <form method="POST" action="/login">
                     @csrf
 
                     <div class="form-group row">
@@ -59,7 +59,6 @@
                                 </a>
                                 @endif
                             </div>
-
                             <div class="row ml-5 pt-2">
                                 <a href="{{ route('register') }}">@lang('lang.signup')</a>
                             </div>
