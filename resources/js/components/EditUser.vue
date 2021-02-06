@@ -143,7 +143,7 @@ export default {
 
         submit(){
             this.errors = {};
-            axios.patch('/userEdit/' + this.id, {
+            axios.patch(`/userEdit/${this.id}`, {
                 method: 'PATCH',
                 name: this.name,
                 tel: this.tel,
@@ -182,7 +182,7 @@ export default {
         changePassword(){
             this.pwdErr = '';
             this.errors = {};
-            axios.put('/passwordEdit/' + this.id, {
+            axios.put(`/passwordEdit/${this.id}`, {
                 method: 'PUT',
                 oldPassword: this.oldPassword,
                 password: this.newPassword,

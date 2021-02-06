@@ -2360,7 +2360,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.errors = {};
-      axios.patch('/userEdit/' + this.id, {
+      axios.patch("/userEdit/".concat(this.id), {
         method: 'PATCH',
         name: this.name,
         tel: this.tel,
@@ -2396,7 +2396,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.pwdErr = '';
       this.errors = {};
-      axios.put('/passwordEdit/' + this.id, {
+      axios.put("/passwordEdit/".concat(this.id), {
         method: 'PUT',
         oldPassword: this.oldPassword,
         password: this.newPassword,
