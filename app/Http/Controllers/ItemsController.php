@@ -11,10 +11,10 @@ class ItemsController extends Controller
 {
     public function index()
     {
-        // Initial localization in spanish according to config.
-        App::setLocale('es');
+        // Initial localization in english according to config.
+        App::setLocale('en');
 
-        session()->put('locale', 'es');
+        session()->put('locale', 'en');
 
         $items = Items::all()->shuffle();
 

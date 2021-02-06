@@ -1,11 +1,11 @@
 {
     "You will find Us" : "Encuentranos en:",
-    "Phisical adress" : "Direccion Física",
-    "Hours of services" : "Horario de Servicio",
+    "Phisical adress" : "Dirección Física",
+    "Hours of services" : "Horario de Servício",
     "Mon-Fri" : "Lun-Vier",
     "Sat" : "Sab",
     "Sun: closed" : "Dom: cerrado",
-    "Service Areas" : "Areas de Servicio",
+    "Service Areas" : "Areas de Servício",
     "City State" : "Ciudad Estado",
     "Leave a comment" : "Deja tu comentario",
     "save for later" : "Guardar",
@@ -17,5 +17,5 @@
     "Credit or debit card" : "Débito o Crédito",
     "Pay with Stripe" : "Paga con Stripe",
     "Your Info" : "Tu Info",
-    "noItems" : "No hay artículos en tu wishlist"
+    "No Items" : "No hay artículos en tu wishlist"
 }

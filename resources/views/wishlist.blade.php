@@ -15,7 +15,7 @@
         @elseif ($noItems === false)
 
             <div class="alert alert-success text-center" role="alert">
-                {{ __('noItems')}}.
+                {{ __('No Items')}}.
             </div>
 
         @endif
