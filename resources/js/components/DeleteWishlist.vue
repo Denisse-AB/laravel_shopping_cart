@@ -22,7 +22,7 @@ export default {
 
     methods: {
         submit(){
-            axios.delete('/wishlist/' + this.itemId, {
+            axios.delete(`/wishlist/${this.itemId}`, {
                 method: 'DELETE',
             })
             .catch((error) => {

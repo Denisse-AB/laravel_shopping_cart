@@ -91,7 +91,7 @@ export default {
     methods:{
         //fetch data
         fetch(){
-            axios.get('/comments/' + this.itemId )
+            axios.get(`/comments/${this.itemId}` )
             .then(response => {
 
                 this.commentsData = response.data.comments;
@@ -107,7 +107,7 @@ export default {
 
         submit(){
             this.errors = {};
-            axios.post('/comment/' + this.itemId, {
+            axios.post(`/comment/${this.itemId}`, {
                 comment: this.text,
             })
             .then(response => {
@@ -126,7 +126,7 @@ export default {
         },
 
         Delete(row_id){
-            axios.delete('/deleteComment/' + row_id,{
+            axios.delete(`/deleteComment/${row_id}`,{
                 method: 'DELETE',
             })
             .then(response => {
@@ -155,7 +155,7 @@ export default {
 
         reply(row_id){
             this.errors = {};
-            axios.post('/reply/' + row_id, {
+            axios.post(`/reply/${row_id}`, {
                 reply: this.replyText,
             })
             .then(response => {
@@ -177,7 +177,7 @@ export default {
         },
 
         DeleteReply(replies_id){
-            axios.delete('/deleteReply/' + replies_id,{
+            axios.delete(`/deleteReply/${replies_id}`,{
                 method: 'DELETE',
             })
             .then(response => {

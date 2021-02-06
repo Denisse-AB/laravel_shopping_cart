@@ -37,7 +37,7 @@ export default {
     methods:{
         edit(){
           this.errors = {};
-            axios.patch('/update/' + this.commentId,{
+            axios.patch(`/update/${this.commentId}`,{
                 method: 'PATCH',
                 text: this.text,
 
