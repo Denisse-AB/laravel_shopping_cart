@@ -20,6 +20,7 @@ class SaveForLaterController extends Controller
     public function store(Request $request, Items $item)
     {
         $user = Auth::user()->id;
+
         $id = $item->id;
 
         $db = auth()->user()->saveForLater()->create([
@@ -62,10 +63,18 @@ class SaveForLaterController extends Controller
         $saveForLater = SaveForLater::where('user_id', $user)->get();
 
        if ($saveForLater->count() == 0) {
-            return redirect()->back()->with('status', 'Success, Your wishlist is empty!');
+            if (session('locale') === 'en') {
+                $message = 'Success, Your wishlist is empty!';
+                $message2 = 'Success, Item deleted!';
+            } else {
+                $message = 'Muy bien, Has vaciado tu wishlist!';
+                $message2 = 'Muy bien, Borraste el producto!';
+            }
+
+            return redirect()->back()->with('status', $message);
 
         } else {
-            return redirect()->back()->with('status', 'Success, Item deleted!');
+            return redirect()->back()->with('status', $message2);
 
         }
     }

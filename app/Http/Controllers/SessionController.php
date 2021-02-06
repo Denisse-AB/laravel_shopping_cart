@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\SaveForLater;
 use App\Items;
+use App\SaveForLater;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -40,12 +40,20 @@ class SessionController extends Controller
 
             session()->put('cart', $cart);
 
+            if (session('locale') === 'es') {
+                return redirect()->back()->with('success', 'Poducto añadido al carrito!');
+            }
+
             return redirect()->back()->with('success', 'Product added to cart successfully!');
 
         }
 
         // If the cart is not empty, then check if this product exist.
         if(isset($cart[$id])) {
+
+            if (session('locale') === 'es') {
+                return redirect()->back()->with('status', 'Tu producto ya está en el carrito!');
+            }
 
             return redirect()->back()->with('status', 'Product already added to the cart');
         }
@@ -60,6 +68,10 @@ class SessionController extends Controller
         ];
 
         session()->put('cart', $cart);
+
+        if (session('locale') === 'es') {
+            return redirect()->back()->with('success', 'Poducto añadido al carrito!');
+        }
 
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }

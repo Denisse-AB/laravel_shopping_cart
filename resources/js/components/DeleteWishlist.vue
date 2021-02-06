@@ -1,7 +1,7 @@
 <template>
 
     <form>
-        <button type="submit" @click="submit" class="btn btn-danger btn-sm float-right m-2">Remove</button>
+        <button type="submit" @click="submit" class="btn btn-danger btn-sm float-right m-2" v-text="text"></button>
     </form>
 
 </template>
@@ -10,7 +10,8 @@
 export default {
 
     props: {
-        itemId: String
+        itemId: String,
+        lang: String
     },
 
     data: function () {
@@ -29,6 +30,12 @@ export default {
                   window.location='/login';
                 }
             });
+        }
+    },
+
+    computed: {
+        text () {
+            return (this.lang == 'es') ? 'Remover' :'Remove' ;
         }
     }
 }

@@ -1,6 +1,9 @@
 <?php
 
+use App\Items;
 use App\Mail\ReceiptMail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Sample\CaptureIntentExamples\CreateOrder;
 
@@ -20,9 +23,20 @@ Route::get('/email', function() {
     return new ReceiptMail();
 });
 
-Route::get('/', 'ItemsController@index')->name('items.index');
+Route::get('/lang/{lang}', function ($lang) {
+    if (! in_array($lang, ['en', 'es'])) {
+        abort(400);
+    }
+    App::setLocale($lang);
 
-Route::get('/items', 'ItemsController@items')->name('items.get');
+    session()->put('locale', $lang);
+
+    $items = Items::all()->shuffle();
+
+    return view('index', compact('items'));
+});
+
+Route::get('/', 'ItemsController@index')->name('items.index');
 
 Route::get('/items/{item}', 'ItemsController@show')->name('items.show');
 
@@ -34,16 +48,15 @@ Route::delete('/item/{id}', 'SessionController@delete')->name('item.destroy');
 
 Auth::routes();
 
+Route::post('/login', 'LoginController@authenticate')->name('user.auth');
+
 Route::get('/wishlist', 'SaveForLaterController@show')->name('wishlist.show');
 
 Route::get('/account', 'UserController@show')->name('account.show');
 
-Route::get('/checkout', 'CheckoutController@show')->name('checkout.show');
+Route::post('stripe/webhook','\App\Http\Controllers\WebhookController@handleWebhook');
 
-Route::post(
-    'stripe/webhook',
-    '\App\Http\Controllers\WebhookController@handleWebhook'
-);
+Route::get('/checkout', 'CheckoutController@show')->name('checkout.show');
 
 Route::put('/passwordEdit/{user_id}', 'UserController@put')->name('password.update');
 

@@ -33,8 +33,8 @@
                             <h5 class="card-title">{{ $item->name }}</h5>
                             <p class="card-text">{{ $item->description }}</p>
                             {{-- button --}}
-                            <delete-wishlist item-id="{{ $item->id }}"></delete-wishlist>
-                            <a href="/items/{{ $item->id }}" class="btn btn-secondary btn-sm float-right m-2" role="button">Add to cart</a>
+                            <delete-wishlist item-id="{{ $item->id }}" lang="{{ __('lang.en')}}"></delete-wishlist>
+                            <a href="/items/{{ $item->id }}" class="btn btn-secondary btn-sm float-right m-2" role="button">@lang('lang.cart')</a>
                         </div>
                     </div>
                 </div>

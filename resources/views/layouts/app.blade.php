@@ -12,8 +12,8 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
-    <script src="{{ asset('js/client.js') }}" defer></script>
-    <script src="https://js.stripe.com/v3/"></script>
+    {{-- <script src="{{ asset('js/client.js') }}" defer></script> --}}
+    {{-- <script src="https://js.stripe.com/v3/"></script> --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -37,20 +37,28 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <a class="nav-item nav-link active badge-pill" href="{{ url('/') }}">Home</a>
-                        <a class="nav-item nav-link active badge-pill" href="/wishlist">Wishlist</a>
+                        <a class="nav-item nav-link active badge-pill" href="{{ url('/') }}">@lang('lang.home')</a>
+                        <a class="nav-item nav-link active badge-pill" href="/wishlist">@lang('lang.wishlist')</a>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle badge-pill" id="language" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" v-pre>
+                                @lang('lang.lang')
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="language">
+                                <a class="dropdown-item" href={{ url('lang/en') }}>English</a>
+                                <a class="dropdown-item" href={{ url('lang/es') }}>Español</a>
+                            </div>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link active badge-pill" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
+                            <button class="btn btn-outline-light badge-pill my-2 my-sm-0" data-toggle="modal" data-target="#login">@lang('lang.login')</button>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link active badge-pill" href="{{ route('register') }}">{{ __('SingUp') }}</a>
+                                    <a class="nav-link active badge-pill" href="{{ route('register') }}">@lang('lang.signup')</a>
                                 </li>
                             @endif
 
@@ -77,15 +85,15 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        @lang('lang.logout')
                                     </a>
 
                                     <a class="dropdown-item" href="/account">
-                                        Account
+                                        @lang('lang.account')
                                     </a>
 
                                     <a class="dropdown-item" href="/checkout">
-                                        Checkout
+                                        @lang('lang.checkout')
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -114,6 +122,10 @@
 
         <main class="py-4">
             @yield('content')
+        </main>
+
+        <main class="py-4">
+            @yield('loginModal')
         </main>
 
         <section>

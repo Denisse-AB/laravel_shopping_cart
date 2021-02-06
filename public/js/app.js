@@ -2135,7 +2135,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    itemId: String
+    itemId: String,
+    lang: String
   },
   data: function data() {
     return {
@@ -2144,13 +2145,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      axios["delete"]('/item/' + this.itemId, {
+      axios["delete"]("/item/".concat(this.itemId), {
         method: 'DELETE'
       })["catch"](function (error) {
         if (error.response.status == 401) {
           window.location = '/login';
         }
       });
+    }
+  },
+  computed: {
+    text: function text() {
+      return this.lang == 'es' ? 'Remover' : 'Remove';
     }
   }
 });
@@ -2176,7 +2182,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    itemId: String
+    itemId: String,
+    lang: String
   },
   data: function data() {
     return {
@@ -2192,6 +2199,11 @@ __webpack_require__.r(__webpack_exports__);
           window.location = '/login';
         }
       });
+    }
+  },
+  computed: {
+    text: function text() {
+      return this.lang == 'es' ? 'Remover' : 'Remove';
     }
   }
 });
@@ -2306,6 +2318,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     customerId: String,
@@ -2314,12 +2329,12 @@ __webpack_require__.r(__webpack_exports__);
     customerCity: String,
     customerState: String,
     customerZip: String,
-    customerTel: String
+    customerTel: String,
+    lang: String
   },
   data: function data() {
     return {
       show: false,
-      alert: false,
       hide: true,
       passForm: false,
       id: this.customerId,
@@ -2339,13 +2354,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     form: function form() {
-      this.hide = false, this.alert = false, this.show = true;
+      this.hide = false, this.show = true;
     },
     submit: function submit() {
       var _this = this;
 
       this.errors = {};
-      axios.patch('/userEdit/' + this.id, {
+      axios.patch("/userEdit/".concat(this.id), {
         method: 'PATCH',
         name: this.name,
         tel: this.tel,
@@ -2356,7 +2371,8 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         if (response.status === 200 || {}) {
           _this.show = false;
-          _this.alert = true;
+          alert('Success, Your credentials has change.');
+          window.location.reload();
         }
       })["catch"](function (error) {
         if (error.response.status === 422) {
@@ -2380,7 +2396,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.pwdErr = '';
       this.errors = {};
-      axios.put('/passwordEdit/' + this.id, {
+      axios.put("/passwordEdit/".concat(this.id), {
         method: 'PUT',
         oldPassword: this.oldPassword,
         password: this.newPassword,
@@ -2401,6 +2417,17 @@ __webpack_require__.r(__webpack_exports__);
           alert('Error updating try again later.');
         }
       });
+    }
+  },
+  computed: {
+    edit: function edit() {
+      return this.lang == 'es' ? 'Edita tu Direccion' : 'Edit your address';
+    },
+    pass: function pass() {
+      return this.lang == 'es' ? 'Cambia tu password' : 'Change your Password';
+    },
+    acc: function acc() {
+      return this.lang == 'es' ? 'Cuenta' : 'Account';
     }
   }
 });
@@ -2539,7 +2566,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     itemId: String,
-    checkdb: String
+    checkdb: String,
+    lang: String
   },
   data: function data() {
     return {
@@ -2550,7 +2578,7 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
-      axios.post('/saveForLater/' + this.itemId).then(function (response) {
+      axios.post("/saveForLater/".concat(this.itemId)).then(function (_response) {
         _this.status = !_this.status;
       })["catch"](function (errors) {
         if (errors.response.status == 401) {
@@ -2563,7 +2591,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     buttonText: function buttonText() {
-      return this.status ? 'Item save in wishlist' : 'Save for Later'; //? ternary operator js (if or else statement)
+      if (this.lang == 'en') {
+        return this.status ? 'Item save in wishlist' : 'Save for Later';
+      } else {
+        return this.status ? 'Producto en tu lista' : 'Guardar en tu lista';
+      }
     },
     isDisabled: function isDisabled() {
       if (this.status == true) {
@@ -39215,14 +39247,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("form", { on: { submit: _vm.submit } }, [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-danger btn-sm float-right m-2",
-        attrs: { type: "submit", value: "submit" }
-      },
-      [_vm._v("Remove")]
-    )
+    _c("button", {
+      staticClass: "btn btn-danger btn-sm float-right m-2",
+      attrs: { type: "submit", value: "submit" },
+      domProps: { textContent: _vm._s(_vm.text) }
+    })
   ])
 }
 var staticRenderFns = []
@@ -39248,15 +39277,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("form", [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-danger btn-sm float-right m-2",
-        attrs: { type: "submit" },
-        on: { click: _vm.submit }
-      },
-      [_vm._v("Remove")]
-    )
+    _c("button", {
+      staticClass: "btn btn-danger btn-sm float-right m-2",
+      attrs: { type: "submit" },
+      domProps: { textContent: _vm._s(_vm.text) },
+      on: { click: _vm.submit }
+    })
   ])
 }
 var staticRenderFns = []
@@ -39286,9 +39312,11 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-sm-6 text-center" }, [
           _c("div", { staticClass: "row justify-content-center p-3" }, [
-            _c("h1", { staticClass: "display-4", attrs: { id: "firaSans" } }, [
-              _vm._v("Account")
-            ]),
+            _c("h1", {
+              staticClass: "display-4",
+              attrs: { id: "firaSans" },
+              domProps: { textContent: _vm._s(_vm.acc) }
+            }),
             _vm._v(" "),
             _c(
               "div",
@@ -39333,15 +39361,12 @@ var render = function() {
                     _vm._v(" "),
                     _c("p", [_vm._v(_vm._s(_vm.customerTel))]),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-secondary btn-sm mb-3",
-                        attrs: { type: "button" },
-                        on: { click: _vm.form }
-                      },
-                      [_vm._v("Edit your address")]
-                    )
+                    _c("button", {
+                      staticClass: "btn btn-secondary btn-sm mb-3",
+                      attrs: { type: "button" },
+                      domProps: { textContent: _vm._s(_vm.edit) },
+                      on: { click: _vm.form }
+                    })
                   ]
                 ),
                 _vm._v(" "),
@@ -39367,9 +39392,17 @@ var render = function() {
                   [
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-6" }, [
-                        _c("label", { attrs: { for: "inputPassword4" } }, [
-                          _vm._v("Name")
-                        ]),
+                        _vm.lang === "en"
+                          ? _c("label", { attrs: { for: "inputPassword4" } }, [
+                              _vm._v("Name")
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.lang === "es"
+                          ? _c("label", { attrs: { for: "inputPassword4" } }, [
+                              _vm._v("Nombre")
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -39442,9 +39475,17 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "inputAddress" } }, [
-                        _vm._v("Address")
-                      ]),
+                      _vm.lang === "en"
+                        ? _c("label", { attrs: { for: "inputAddress" } }, [
+                            _vm._v("Address")
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.lang === "es"
+                        ? _c("label", { attrs: { for: "inputPassword4" } }, [
+                            _vm._v("Direccion")
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -39480,9 +39521,17 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-6" }, [
-                        _c("label", { attrs: { for: "inputCity" } }, [
-                          _vm._v("City")
-                        ]),
+                        _vm.lang === "en"
+                          ? _c("label", { attrs: { for: "inputCity" } }, [
+                              _vm._v("City")
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.lang === "es"
+                          ? _c("label", { attrs: { for: "inputPassword4" } }, [
+                              _vm._v("Ciudad")
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -39517,9 +39566,17 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-4" }, [
-                        _c("label", { attrs: { for: "inputState" } }, [
-                          _vm._v("State")
-                        ]),
+                        _vm.lang === "en"
+                          ? _c("label", { attrs: { for: "inputState" } }, [
+                              _vm._v("State")
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.lang === "es"
+                          ? _c("label", { attrs: { for: "inputPassword4" } }, [
+                              _vm._v("Estado")
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -39600,34 +39657,6 @@ var render = function() {
                       [_vm._v("Edit your info")]
                     )
                   ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.alert,
-                        expression: "alert"
-                      }
-                    ],
-                    staticClass: "alert alert-success mt-3",
-                    attrs: { role: "alert" }
-                  },
-                  [
-                    _vm._v("\n                            Account Updated! "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "alert-link",
-                        attrs: { href: "/account" }
-                      },
-                      [_vm._v("Go back.")]
-                    ),
-                    _vm._v(".\n                        ")
-                  ]
                 )
               ]
             )
@@ -39667,14 +39696,27 @@ var render = function() {
                   },
                   [
                     _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "float-left m-2",
-                          attrs: { for: "password1" }
-                        },
-                        [_vm._v("Old Password")]
-                      ),
+                      _vm.lang === "en"
+                        ? _c(
+                            "label",
+                            {
+                              staticClass: "float-left m-2",
+                              attrs: { for: "password1" }
+                            },
+                            [_vm._v("Old Password")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.lang === "es"
+                        ? _c(
+                            "label",
+                            {
+                              staticClass: "float-left m-2",
+                              attrs: { for: "inputPassword4" }
+                            },
+                            [_vm._v("Viejo Password")]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _vm.password === "checkbox"
                         ? _c("input", {
@@ -39798,7 +39840,7 @@ var render = function() {
                           staticClass: "float-left m-2",
                           attrs: { for: "password2" }
                         },
-                        [_vm._v("New Password")]
+                        [_vm._v("Password")]
                       ),
                       _vm._v(" "),
                       _vm.password === "checkbox"
@@ -39911,14 +39953,27 @@ var render = function() {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "float-left m-2",
-                          attrs: { for: "password3" }
-                        },
-                        [_vm._v("Confirm Password")]
-                      ),
+                      _vm.lang === "en"
+                        ? _c(
+                            "label",
+                            {
+                              staticClass: "float-left m-2",
+                              attrs: { for: "password3" }
+                            },
+                            [_vm._v("Confirm Password")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.lang === "es"
+                        ? _c(
+                            "label",
+                            {
+                              staticClass: "float-left m-2",
+                              attrs: { for: "inputPassword4" }
+                            },
+                            [_vm._v("Confirma tu Password")]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _vm.password === "checkbox"
                         ? _c("input", {
@@ -40061,23 +40116,20 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.passForm == false,
-                        expression: "passForm == false"
-                      }
-                    ],
-                    staticClass: "btn btn-secondary btn-sm",
-                    attrs: { type: "button" },
-                    on: { click: _vm.showPassform }
-                  },
-                  [_vm._v("Change your Password")]
-                )
+                _c("button", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.passForm == false,
+                      expression: "passForm == false"
+                    }
+                  ],
+                  staticClass: "btn btn-secondary btn-sm",
+                  attrs: { type: "button" },
+                  domProps: { textContent: _vm._s(_vm.pass) },
+                  on: { click: _vm.showPassform }
+                })
               ])
             ]
           )

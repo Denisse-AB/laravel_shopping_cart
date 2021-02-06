@@ -70,9 +70,15 @@ class UserController extends Controller
 
         } else {
 
+            if (session('locale') === 'en') {
+                $message = 'Your password is incorrect.';
+            } else {
+                $message = 'Tu password está incorrecto.';
+            }
+
             return response()->json([
                 'error' => 403,
-                'pwdErr' => 'Your password is incorrect.'
+                'pwdErr' => $message
             ]);
         }
     }

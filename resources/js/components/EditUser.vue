@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-sm-6 text-center">
                 <div class="row justify-content-center p-3">
-                    <h1 id="firaSans" class="display-4">Account</h1>
+                    <h1 id="firaSans" class="display-4" v-text="acc"></h1>
                         <div id="infoBox" class="rounded border border-success text-center w-75 mx-auto shadow">
                             <div v-show="hide">
                             <h5 class="lead p-2 mt-2 font-weight-bold">{{ customerName }}</h5>
@@ -15,12 +15,13 @@
                                     <span>{{ customerZip }}</span>
                                 </p>
                                 <p>{{ customerTel }}</p>
-                                <button type="button" @click="form" class="btn btn-secondary btn-sm mb-3">Edit your address</button>
+                                <button type="button" @click="form" class="btn btn-secondary btn-sm mb-3" v-text="edit"></button>
                             </div>
                                 <form v-show="show" class="m-2" @submit.prevent="submit">
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="inputPassword4">Name</label>
+                                            <label v-if="lang === 'en'" for="inputPassword4">Name</label>
+                                            <label v-if="lang === 'es'" for="inputPassword4">Nombre</label>
                                             <input type="text" v-model="name" v-bind:class="{'form-control' : 'true', 'is-invalid' : errors.name}">
                                             <div v-if="errors && errors.name" class="text-danger">{{ errors.name[0] }}</div>
                                         </div>
@@ -32,18 +33,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputAddress">Address</label>
+                                        <label v-if="lang === 'en'" for="inputAddress">Address</label>
+                                        <label v-if="lang === 'es'" for="inputPassword4">Direccion</label>
                                         <input type="text" v-model="address" v-bind:class="{'form-control' : 'true', 'is-invalid' : errors.address}">
                                         <div v-if="errors && errors.address" class="text-danger">{{ errors.address[0] }}</div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="inputCity">City</label>
+                                            <label v-if="lang === 'en'" for="inputCity">City</label>
+                                            <label v-if="lang === 'es'" for="inputPassword4">Ciudad</label>
                                             <input type="text" v-model="city" v-bind:class="{'form-control' : 'true', 'is-invalid' : errors.city}">
                                             <div v-if="errors && errors.city" class="text-danger">{{ errors.city[0] }}</div>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="inputState">State</label>
+                                            <label v-if="lang === 'en'" for="inputState">State</label>
+                                            <label v-if="lang === 'es'" for="inputPassword4">Estado</label>
                                             <input type="text" v-model="state" v-bind:class="{'form-control' : 'true', 'is-invalid' : errors.state}">
                                             <div v-if="errors && errors.state" class="text-danger">{{ errors.state[0] }}</div>
                                         </div>
@@ -53,11 +57,8 @@
                                             <div v-if="errors && errors.zip" class="text-danger">{{ errors.zip[0] }}</div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-secondary btn-sm">Edit your info</button>
-                                </form>
-                            <div v-show="alert" class="alert alert-success mt-3" role="alert">
-                                Account Updated! <a href="/account" class="alert-link">Go back.</a>.
-                            </div>
+                                <button type="submit" class="btn btn-secondary btn-sm">Edit your info</button>
+                            </form>
                         </div>
                 </div>
             </div>
@@ -70,16 +71,18 @@
                         <form v-show='passForm' class="m-2" @submit.prevent="changePassword">
                             <div class="form-group">
 
-                                <label for="password1" class="float-left m-2">Old Password</label>
+                                <label v-if="lang === 'en'" for="password1" class="float-left m-2">Old Password</label>
+                                <label v-if="lang === 'es'" for="inputPassword4"  class="float-left m-2">Viejo Password</label>
                                 <input v-model="oldPassword" :type="password" v-bind:class="{'form-control' : 'true', 'is-invalid' : errors.oldPassword || pwdErr}" id="password1" placeholder="Password">
                                 <div v-if="errors && errors.oldPassword" class="text-danger">{{ errors.oldPassword[0] }}</div>
                                 <div v-if="pwdErr" class="text-danger">{{ pwdErr }}</div>
 
-                                <label for="password2" class="float-left m-2">New Password</label>
+                                <label for="password2" class="float-left m-2">Password</label>
                                 <input v-model="newPassword" :type="password" v-bind:class="{'form-control' : 'true', 'is-invalid' : errors.password}" id="password2" placeholder="New Password">
                                 <div v-if="errors && errors.password" class="text-danger">{{ errors.password[0] }}</div>
 
-                                <label for="password3" class="float-left m-2">Confirm Password</label>
+                                <label v-if="lang === 'en'" for="password3" class="float-left m-2">Confirm Password</label>
+                                <label v-if="lang === 'es'" for="inputPassword4" class="float-left m-2">Confirma tu Password</label>
                                 <input v-model="confirmPassword" :type="password" v-bind:class="{'form-control' : 'true', 'is-invalid' : errors.password_confirmation}" id="password3" placeholder="Confirm Password">
                                 <div v-if="errors && errors.password_confirmation" class="text-danger">{{ errors.password_confirmation[0] }}</div>
 
@@ -87,7 +90,7 @@
                             <button @click.prevent="reveal" class="btn btn-light btn-sm float-left"><i class="fas fa-eye" style="font-size: 17px;"></i></button>
                             <button class="btn btn-secondary btn-sm" type="submit">Submit</button>
                         </form>
-                        <button v-show="passForm == false" @click="showPassform" class="btn btn-secondary btn-sm" type="button">Change your Password</button>
+                        <button v-show="passForm == false" @click="showPassform" class="btn btn-secondary btn-sm" type="button" v-text="pass"></button>
                     </div>
                 </div>
             </div>
@@ -107,13 +110,13 @@ export default {
         customerCity: String,
         customerState: String,
         customerZip: String,
-        customerTel: String
+        customerTel: String,
+        lang: String
     },
 
     data(){
         return {
             show: false,
-            alert: false,
             hide: true,
             passForm: false,
             id: this.customerId,
@@ -135,13 +138,12 @@ export default {
     methods: {
         form(){
             this.hide = false,
-            this.alert = false,
             this.show = true
         },
 
         submit(){
             this.errors = {};
-            axios.patch('/userEdit/' + this.id, {
+            axios.patch(`/userEdit/${this.id}`, {
                 method: 'PATCH',
                 name: this.name,
                 tel: this.tel,
@@ -153,7 +155,8 @@ export default {
             .then(response => {
                 if (response.status === 200 || {} ) {
                     this.show = false;
-                    this.alert = true;
+                    alert('Success, Your credentials has change.');
+                    window.location.reload();
                 }
             })
             .catch(error => {
@@ -179,7 +182,7 @@ export default {
         changePassword(){
             this.pwdErr = '';
             this.errors = {};
-            axios.put('/passwordEdit/' + this.id, {
+            axios.put(`/passwordEdit/${this.id}`, {
                 method: 'PUT',
                 oldPassword: this.oldPassword,
                 password: this.newPassword,
@@ -206,5 +209,17 @@ export default {
             });
         }
     },
+    computed: {
+        edit(){
+            return (this.lang == 'es') ? 'Edita tu Direccion' : 'Edit your address';
+        },
+        pass () {
+           return (this.lang == 'es') ? 'Cambia tu password' : 'Change your Password';
+        },
+        acc () {
+            return (this.lang == 'es') ? 'Cuenta' : 'Account';
+        }
+    }
+
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
 
     <form @submit="submit">
-        <button type="submit" value='submit' class="btn btn-danger btn-sm float-right m-2">Remove</button>
+        <button type="submit" value='submit' class="btn btn-danger btn-sm float-right m-2" v-text="text"></button>
     </form>
 
 </template>
@@ -10,7 +10,8 @@
 export default {
 
     props: {
-        itemId: String
+        itemId: String,
+        lang: String
     },
 
     data: function () {
@@ -21,7 +22,7 @@ export default {
 
     methods: {
         submit(){
-            axios.delete('/item/' + this.itemId, {
+            axios.delete(`/item/${this.itemId}`, {
                  method: 'DELETE',
             })
             .catch(error => {
@@ -30,7 +31,12 @@ export default {
                 }
             });
         }
-    }
+    },
 
+    computed: {
+        text () {
+            return (this.lang == 'es') ? 'Remover' :'Remove' ;
+        }
+    }
 }
 </script>

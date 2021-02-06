@@ -132,6 +132,7 @@ class CheckoutController extends Controller
         return view('thankyou', compact('db'));
 
         } catch(CardException $e){
+            // TODO: MESSAGE IN SPANISH
             return redirect()->back()->with('status', $e->getMessage());
 
         } catch (Exception $e) {

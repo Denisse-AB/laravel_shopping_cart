@@ -51,10 +51,10 @@
                                         <form action="/item/{{ $item->id }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm float-right m-2">Remove</button>
+                                            <button type="submit" class="btn btn-danger btn-sm float-right m-2">@lang('lang.remove')</button>
                                         </form>
                                         {{-- vue --}}
-                                            <save-item item-id="{{ $item->id }}" checkdb="{{ $checkdb }}"></save-item>
+                                            <save-item item-id="{{ $item->id }}" checkdb="{{ $checkdb }}" lang="{{ __('lang.en')}}"></save-item>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
             {{-- subTotal --}}
             <div class="col-md-4">
                 <div class="card">
-                    <h5 class="card-header text-center">Your Items!</h5>
+                    <h5 class="card-header text-center">{{ __('Your Items')}}!</h5>
                     <div class="card-body">
                         <h5 class="card-text"><small class="font-weight-bold">Subtotal: </small>
                             <small class="float-right">
@@ -85,7 +85,7 @@
                             </small>
                         </h5>
                         {{-- shipping --}}
-                        <h5 class="card-text"><small class="font-weight-bold">Shipping: </small>
+                        <h5 class="card-text"><small class="font-weight-bold">@lang('lang.shipping'): </small>
                             <small class="float-right">
                                 <span>
                                     {{ number_format(0, 2) }}
@@ -108,7 +108,7 @@
                         <div>
                             <br>
                             <label for="card-element" class="offset-3">
-                                Credit or debit card
+                                {{ __('Credit or debit card')}}
                             </label>
                             <div id="card-element">
                                 <!-- A Stripe Element will be inserted here. -->
@@ -119,7 +119,7 @@
                         <button id="checkout-button" data-secret="{{ $intent->client_secret }}" class="btn btn-light badge-pill btn-block my-3 button shadow" role="button" style="background-color: #5469d4; color:#ffffff;">
                             <span id="spinner" class="spinner-border spinner-border-sm invisible" role="status" aria-hidden="false"></span>
                             {{-- <div class="spinner hidden" id="spinner"></div> --}}
-                            <span id="button-text">Pay with Stripe
+                            <span id="button-text">{{ __('Pay with Stripe')}}
                             <i class="fab fa-cc-stripe" style="font-size: 20px;padding-left:5px;"></i></span>
                         </button>
                             <input type="text" name="total" id="total" value="{{ $total }}" hidden>
@@ -134,7 +134,7 @@
                 </div>
                 {{-- Personal info --}}
                 <div class="card mt-2">
-                <h5 class="card-header text-center">Your Info <a class="float-right text-decoration-none text-body" href="/account"><span><i class="fas fa-cog"></i></a></span></h5>
+                <h5 class="card-header text-center">{{ __('Your Info')}} <a class="float-right text-decoration-none text-body" href="/account/{{ __('lang.en')}}"><span><i class="fas fa-cog"></i></a></span></h5>
                     <div class="card-body">
                         <p class="pb-2">{{ $user->name }} <span class="float-right">{{ $user->email }}</span></p>
                         <hr>
