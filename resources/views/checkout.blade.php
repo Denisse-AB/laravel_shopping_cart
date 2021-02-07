@@ -118,7 +118,6 @@
                         </div>
                         <button id="checkout-button" data-secret="{{ $intent->client_secret }}" class="btn btn-light badge-pill btn-block my-3 button shadow" role="button" style="background-color: #5469d4; color:#ffffff;">
                             <span id="spinner" class="spinner-border spinner-border-sm invisible" role="status" aria-hidden="false"></span>
-                            {{-- <div class="spinner hidden" id="spinner"></div> --}}
                             <span id="button-text">{{ __('Pay with Stripe')}}
                             <i class="fab fa-cc-stripe" style="font-size: 20px;padding-left:5px;"></i></span>
                         </button>
