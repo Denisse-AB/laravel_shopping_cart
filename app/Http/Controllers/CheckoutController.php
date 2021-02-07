@@ -127,7 +127,7 @@ class CheckoutController extends Controller
            $orders = new ReceiptMail($db, $customer);
         }
         //send Mail.
-        // Mail::to($customer->email)->send($orders);
+        Mail::to($customer->email)->send($orders);
 
         return view('thankyou', compact('db'));
 
