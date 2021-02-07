@@ -15,7 +15,7 @@
         <!-- animate__slow for duration -->
         <div class="row p-2">
             <h5 class="m-3 font-weight-bold">{{ row.name }}</h5>
-            <p class="m-3" @click="Delete">
+            <p class="m-3">
                 {{ row.comment }}
             </p>
             <p class="text-muted m-3">
