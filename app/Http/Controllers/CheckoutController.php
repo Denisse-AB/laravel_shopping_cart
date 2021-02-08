@@ -63,7 +63,7 @@ class CheckoutController extends Controller
             'currency' => 'usd',
                 'shipping' => [
                     'name' => $user->name,
-                    'phone' => '787-000-0000',
+                    'phone' => $user->tel,
                     'address' => [
                     'line1' => $user->address,
                     'city' => $user->city,

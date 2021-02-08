@@ -87,7 +87,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="d-flex align-items-baseline">
-                        <a href="/login" class="btn btn-secondary btn-sm d-flex justify-content-start badge-pill" type="role">@lang('lang.login')</a>
+                        <button class="btn btn-secondary btn-sm d-flex justify-content-start badge-pill" data-toggle="modal" data-target="#login">@lang('lang.login')</button>
                         <h4 class="offset-4">@lang('Leave a comment')</h4>
                     </div>
                     <hr>

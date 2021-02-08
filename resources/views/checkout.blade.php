@@ -125,6 +125,7 @@
                             <input type="text"name='tx' value="{{ $tax }}" hidden>
                             <input type="text" name="email" id="email" value="{{ $user->email }}" hidden>
                             <input type="text" name="name" id="name" value="{{ $user->name }}" hidden>
+                            <input type="text" name="tel" id="tel" value="{{ $user->tel }}" hidden>
                             <input type="text" name="address" id="address" value="{{ $user->address }}" hidden>
                             <input type="text" name="zip" id="zip" value="{{ $user->zip }}" hidden>
                             <input type="text" name="city" id="city" value="{{ $user->city }}" hidden>

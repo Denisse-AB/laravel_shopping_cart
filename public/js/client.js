@@ -54,7 +54,7 @@ form.addEventListener('submit', function (event) {
             card: card,
             billing_details: {
                 name: document.getElementById('name').value,
-                phone:'787-000-0000',
+                phone: document.getElementById('tel').value,
                 email: document.getElementById('email').value,
                     address: {
                         line1: document.getElementById('address').value,
