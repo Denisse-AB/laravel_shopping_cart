@@ -28,8 +28,8 @@
     <div class="row py-4">
         {{-- image --}}
         <div class="col-md-6">
-            <div class="row justify-content-center">
-            <img class="img-fluid" src="{{url('/images/'.$items->image)}}" style="width: 250px;">
+            <div class="row justify-content-center" style="max-width: 540px;">
+            <img src="{{url('/images/'.$items->image)}}" style="width: 250px;height: 250px;">
             </div>
         </div>
         {{-- details --}}
