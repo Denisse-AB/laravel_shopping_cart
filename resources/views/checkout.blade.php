@@ -65,7 +65,7 @@
                 @endif
             </div>
             {{-- subTotal --}}
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="card">
                     <h5 class="card-header text-center">{{ __('Your Items')}}!</h5>
                     <div class="card-body">
@@ -107,7 +107,7 @@
 
                         <div>
                             <br>
-                            <label for="card-element" class="offset-3">
+                            <label for="card-element" class="d-flex justify-content-center">
                                 {{ __('Credit or debit card')}}
                             </label>
                             <div id="card-element">
