@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     $("[name=plus]").on("click", function () {
         var counter = parseInt($("[name=quantity]").val());
         counter++;
@@ -10,7 +10,7 @@ $(document).ready(function () {
         }
     });
 
-    $("[name=minus]").click(function () {
+    $("[name=minus]").on("click", function () {
         var counter = parseInt($("[name=quantity]").val());
         counter--;
         if (counter !== 0) {
@@ -26,7 +26,7 @@ $(document).ready(function () {
         $('#count').addClass('animate__animated animate__bounce');
     }
 
-    $('#remember').click(function () {
+    $('#remember').on("click", function () {
         var x = document.getElementById("password");
         if (x.type === "password") {
             x.type = "text";
