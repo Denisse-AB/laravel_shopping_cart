@@ -60,140 +60,128 @@
 import ModalComponent from './ModalComponent.vue';
 
 export default {
-
-    props: {
-        user: String,
-        userId: String,
-        itemId: String,
-        lang: String
-    },
-
-    components : {
-        ModalComponent
-    },
-
-    mounted(){
-        this.fetch();
-    },
-
-    data(){
-        return{
-            text: '',
-            commentsData: [],
-            repliesData: [],
-            errors: {},
-            commentId: '',
-            replyBox: false,
-            rowId: '',
-            replyText: ''
-        }
-    },
-
-    methods:{
-        //fetch data
-        fetch(){
-            axios.get(`/comments/${this.itemId}` )
-            .then(response => {
-                this.commentsData = response.data.comments;
-                this.commentsData = _.orderBy(response.data.comments, ['created_at'], ['desc']);
-                this.repliesData = response.data.replies;
-            })
-            .catch(error => {
-                alert('Server Error.');
-            });
-        },
-
-        submit(){
-            this.errors = {};
-            axios.post(`/comment/${this.itemId}`, {
-                comment: this.text,
-            })
-            .then(response => {
-                this.text = '';
-                this.fetch();
-            })
-            .catch(error => {
-                if (error.response.status === 422) {
-                    this.errors = error.response.data.errors;
-                } else {
-                    alert('There was an error sending you comment!');
-                }
-            });
-        },
-
-        Delete(row_id){
-            axios.delete(`/deleteComment/${row_id}`,{
-                method: 'DELETE',
-            })
-            .then(response => {
-                if (response.data == 200) {
-                   this.fetch();
-                }
-            })
-            .catch(error => {
-                alert('There was an error deleting you comment!');
-            });
-        },
-
-        modal(row_id){
-            this.commentId = row_id;
-            this.ModalComponent = true;
-        },
-
-        replyArea(row_id){
-            this.rowId = row_id;
-            this.replyBox = !this.replyBox;
-        },
-
-        reply(row_id){
-            this.errors = {};
-            axios.post(`/reply/${row_id}`, {
-                reply: this.replyText,
-            })
-            .then(response => {
-                this.replyText = '';
-                this.replyBox = false;
-                this.fetch();
-            })
-            .catch(error => {
-                if (error.response.status === 422) {
-                    this.errors = error.response.data.errors;
-                } else {
-                    alert('There was an error sending you comment!');
-                }
-            });
-        },
-
-        DeleteReply(replies_id){
-            axios.delete(`/deleteReply/${replies_id}`,{
-                method: 'DELETE',
-            })
-            .then(response => {
-                if (response.data == 200) {
-                   this.fetch();
-                }
-            })
-            .catch(error => {
-                alert('There was an error deleting you comment!');
-            });
-        }
-    },
-
-    computed: {
-        buttonText(){
-            if (this.lang == 'es') {
-                return (this.replyBox && this.rowId) ? 'Cerrar' : 'Responder'
-            } else {
-                return (this.replyBox && this.rowId) ? 'Close' : 'Reply'
-            }
-        },
-        send () {
-            return (this.lang == 'es') ? 'Enviar' : 'Send'
-        },
-        edit () {
-            return (this.lang == 'es') ? 'Editar' : 'Edit'
-        }
+  props: {
+    user: String,
+    userId: String,
+    itemId: String,
+    lang: String
+  },
+  components : {
+    ModalComponent
+  },
+  mounted(){
+    this.fetch();
+  },
+  data(){
+    return{
+      text: '',
+      commentsData: [],
+      repliesData: [],
+      errors: {},
+      commentId: '',
+      replyBox: false,
+      rowId: '',
+      replyText: ''
     }
+  },
+  methods:{
+    //fetch data
+    fetch(){
+      axios.get(`/comments/${this.itemId}` )
+        .then(response => {
+          this.commentsData = response.data.comments;
+          this.commentsData = _.orderBy(response.data.comments, ['created_at'], ['desc']);
+          this.repliesData = response.data.replies;
+        })
+        .catch(error => {
+          alert('Server Error.');
+        });
+    },
+    submit(){
+      this.errors = {};
+      axios.post(`/comment/${this.itemId}`, {
+        comment: this.text,
+      })
+      .then(response => {
+        this.text = '';
+        this.fetch();
+      })
+      .catch(error => {
+        if (error.response.status === 422) {
+          this.errors = error.response.data.errors;
+        } else {
+          alert('There was an error sending you comment!');
+        }
+      });
+    },
+    Delete(row_id){
+      axios.delete(`/deleteComment/${row_id}`,{
+        method: 'DELETE',
+      })
+      .then(response => {
+        if (response.data == 200) {
+          this.fetch();
+        }
+      })
+      .catch(error => {
+        alert('There was an error deleting you comment!');
+      });
+    },
+    modal(row_id){
+      this.commentId = row_id;
+      this.ModalComponent = true;
+    },
+    replyArea(row_id){
+      this.rowId = row_id;
+      this.replyBox = !this.replyBox;
+    },
+    reply(row_id){
+      this.errors = {};
+      axios.post(`/reply/${row_id}`, {
+        reply: this.replyText,
+      })
+      .then(response => {
+        this.replyText = '';
+        this.replyBox = false;
+        this.fetch();
+      })
+      .catch(error => {
+        if (error.response.status === 422) {
+          this.errors = error.response.data.errors;
+        } else {
+          alert('There was an error sending you comment!');
+        }
+      });
+    },
+    DeleteReply(replies_id){
+      axios.delete(`/deleteReply/${replies_id}`,{
+        method: 'DELETE',
+      })
+      .then(response => {
+        if (response.data == 200) {
+          this.fetch();
+        }
+      })
+      .catch(error => {
+        alert('There was an error deleting you comment!');
+      });
+    }
+  },
+  computed: {
+    buttonText(){
+      if (this.lang == 'es') {
+        return (this.replyBox && this.rowId) ? 'Cerrar' : 'Responder'
+      } else {
+        return (this.replyBox && this.rowId) ? 'Close' : 'Reply'
+      }
+    },
+    send () {
+      return (this.lang == 'es') ? 'Enviar' : 'Send'
+    },
+    edit () {
+      return (this.lang == 'es') ? 'Editar' : 'Edit'
+    }
+  }
 }
 </script>
 

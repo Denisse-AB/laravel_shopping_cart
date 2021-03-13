@@ -102,132 +102,125 @@
 
 <script>
 export default {
+props: {
+  customerId: String,
+  customerName: String,
+  customerAddress: String,
+  customerCity: String,
+  customerState: String,
+  customerZip: String,
+  customerTel: String,
+  lang: String
+},
+data(){
+  return {
+    show: false,
+    hide: true,
+    passForm: false,
+    id: this.customerId,
+    tel: this.customerTel,
+    name: this.customerName,
+    address: this.customerAddress,
+    city: this.customerCity,
+    state: this.customerState,
+    zip: this.customerZip,
+    password: 'password',
+    oldPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+    errors: {},
+    pwdErr: ''
+  }
+},
 
-    props: {
-        customerId: String,
-        customerName: String,
-        customerAddress: String,
-        customerCity: String,
-        customerState: String,
-        customerZip: String,
-        customerTel: String,
-        lang: String
+  methods: {
+    form(){
+      this.hide = false,
+      this.show = true
     },
-
-    data(){
-        return {
-            show: false,
-            hide: true,
-            passForm: false,
-            id: this.customerId,
-            tel: this.customerTel,
-            name: this.customerName,
-            address: this.customerAddress,
-            city: this.customerCity,
-            state: this.customerState,
-            zip: this.customerZip,
-            password: 'password',
-            oldPassword: '',
-            newPassword: '',
-            confirmPassword: '',
-            errors: {},
-            pwdErr: ''
+    submit(){
+      this.errors = {};
+      axios.patch(`/userEdit/${this.id}`, {
+        method: 'PATCH',
+        name: this.name,
+        tel: this.tel,
+        address: this.address,
+        city: this.city,
+        state: this.state,
+        zip: this.zip,
+      })
+      .then(response => {
+        if (response.status === 200 || {} ) {
+          this.show = false;
+          if (this.lang === 'es') {
+            alert('Muy Bien! Has cambiado tus credenciales.');
+            window.location.reload();
+          } else {
+            alert('Success, Your credentials has change.');
+            window.location.reload();
+          }
         }
+      })
+      .catch(error => {
+        if (error.response.status === 422) {
+          this.errors = error.response.data.errors || {};
+        }
+      })
     },
-
-    methods: {
-        form(){
-            this.hide = false,
-            this.show = true
-        },
-
-        submit(){
-            this.errors = {};
-            axios.patch(`/userEdit/${this.id}`, {
-                method: 'PATCH',
-                name: this.name,
-                tel: this.tel,
-                address: this.address,
-                city: this.city,
-                state: this.state,
-                zip: this.zip,
-            })
-            .then(response => {
-                if (response.status === 200 || {} ) {
-                    this.show = false;
-                    if (this.lang === 'es') {
-                        alert('Muy Bien! Has cambiado tus credenciales.');
-                        window.location.reload();
-                    } else {
-                        alert('Success, Your credentials has change.');
-                        window.location.reload();
-                    }
-                }
-            })
-            .catch(error => {
-                if (error.response.status === 422) {
-                this.errors = error.response.data.errors || {};
-                }
-            });
-        },
-
-        showPassform(){
-            this.passForm = true;
-        },
-
-        reveal(){
-            //password reveal button
-            if (this.password === 'password') {
-                return this.password = 'text';
-            } else {
-                return this.password = 'password'
-            }
-        },
-
-        changePassword(){
-            this.pwdErr = '';
-            this.errors = {};
-            axios.put(`/passwordEdit/${this.id}`, {
-                method: 'PUT',
-                oldPassword: this.oldPassword,
-                password: this.newPassword,
-                password_confirmation: this.confirmPassword
-            })
-            .then(response => {
-                if (response.data.error === 403) {
-                    this.pwdErr = response.data.pwdErr;
-                } else if (response.status === 200) {
-                    if (this.lang === 'es') {
-                        alert('Password Cambiado!');
-                        window.location.reload();
-                    } else {
-                        alert('Password Change!');
-                        window.location.reload();
-                    }
-                } else {
-                    alert('Server error try again later!');
-                }
-            })
-            .catch(error => {
-                if (error.response.status === 422) {
-                    this.errors = error.response.data.errors;
-                } else {
-                    alert('Error updating try again later.');
-                }
-            });
-        }
+    showPassform(){
+      this.passForm = true;
     },
-    computed: {
-        edit(){
-            return (this.lang == 'es') ? 'Edita tu Direccion' : 'Edit your address';
-        },
-        pass () {
-           return (this.lang == 'es') ? 'Cambia tu password' : 'Change your Password';
-        },
-        acc () {
-            return (this.lang == 'es') ? 'Cuenta' : 'Account';
+    reveal(){
+      //password reveal button
+      if (this.password === 'password') {
+        return this.password = 'text';
+      } else {
+        return this.password = 'password'
+      }
+    },
+    changePassword(){
+      this.pwdErr = '';
+      this.errors = {};
+      axios.put(`/passwordEdit/${this.id}`, {
+        method: 'PUT',
+        oldPassword: this.oldPassword,
+        password: this.newPassword,
+        password_confirmation: this.confirmPassword
+      })
+      .then(response => {
+        if (response.data.error === 403) {
+          this.pwdErr = response.data.pwdErr;
+        } else if (response.status === 200) {
+          if (this.lang === 'es') {
+            alert('Password Cambiado!');
+            window.location.reload();
+          } else {
+            alert('Password Change!');
+            window.location.reload();
+          }
+        } else {
+            alert('Server error try again later!');
         }
+      })
+      .catch(error => {
+        if (error.response.status === 422) {
+          this.errors = error.response.data.errors;
+        } else {
+          alert('Error updating try again later.');
+        }
+      })
     }
-
+  },
+  computed: {
+    edit(){
+      return (this.lang == 'es') ? 'Edita tu Direccion' : 'Edit your address';
+    },
+    pass () {
+      return (this.lang == 'es') ? 'Cambia tu password' : 'Change your Password';
+    },
+    acc () {
+      return (this.lang == 'es') ? 'Cuenta' : 'Account';
+    }
+  }
 }
 </script>

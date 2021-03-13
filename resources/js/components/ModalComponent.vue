@@ -22,48 +22,44 @@
 
 <script>
 export default {
+  props: ['commentId', 'lang'],
 
-    props: ['commentId', 'lang'],
-
-    data(){
-        return {
-          text: '',
-          errors:{}
-        }
-    },
-
-    methods:{
-        edit(){
-          this.errors = {};
-            axios.patch(`/update/${this.commentId}`,{
-                method: 'PATCH',
-                text: this.text,
-
-            }).then(response => {
-                if (response.data == 200) {
-                   this.text = '';
-                   window.location.reload();
-                }
-            }).catch(error => {
-                if (error.response.status === 422) {
-                    this.errors = error.response.data.errors;
-                } else {
-                    alert('There was an error editing your comment!');
-                }
-            });
-
-        }
-    },
-
-    computed: {
-      title () {
-        return (this.lang == 'es') ? 'Edita tu commentario' : 'Edit your Comment'
-      },
-      editButton () {
-        return (this.lang == 'es') ? 'Editar' : 'Edit'
-      }
+  data(){
+    return {
+      text: '',
+      errors:{}
     }
-
+  },
+  methods:{
+    edit(){
+      this.errors = {};
+      axios.patch(`/update/${this.commentId}`,{
+        method: 'PATCH',
+        text: this.text,
+      })
+      .then(response => {
+        if (response.data == 200) {
+          this.text = '';
+          window.location.reload();
+        }
+      })
+      .catch(error => {
+        if (error.response.status === 422) {
+          this.errors = error.response.data.errors;
+        } else {
+          alert('There was an error editing your comment!');
+        }
+      });
+    }
+  },
+  computed: {
+    title () {
+      return (this.lang == 'es') ? 'Edita tu commentario' : 'Edit your Comment'
+    },
+    editButton () {
+      return (this.lang == 'es') ? 'Editar' : 'Edit'
+    }
+  }
 }
 </script>
 

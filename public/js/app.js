@@ -2189,8 +2189,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     itemId: String,
@@ -2230,8 +2228,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -2630,8 +2626,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -7198,7 +7192,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#save[data-v-5c88279b]{\r\n    background-color: #158463;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n#save[data-v-5c88279b]{\r\n  background-color: #158463;\n}\r\n", ""]);
 
 // exports
 
