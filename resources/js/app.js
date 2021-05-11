@@ -6,7 +6,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+window.Vue = require('vue').default;
 
 window.axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest',
