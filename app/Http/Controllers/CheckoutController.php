@@ -74,7 +74,7 @@ class CheckoutController extends Controller
             // Verify your integration in this guide by including this parameter
             'metadata' => ['integration_check' => 'accept_a_payment'],
         ]);
-        //send to view the payment intent.
+        //send payment intent to the view.
         return view('checkout', [
             'items' => $items,
             'user' => $user,
