@@ -15,6 +15,8 @@ class SessionController extends Controller
     {
         $item = Items::findOrFail($item_id);
 
+        $user_id = Auth::user()->id;
+
         //int conversion
         $id = intval($item_id);
 
@@ -22,8 +24,10 @@ class SessionController extends Controller
         $cart = session()->get('cart');
         $qty =  $request->input('qty');
         $price =  $request->input('price');
-
-        $checkdb = SaveForLater::where('item_id', $item_id)->exists();
+        $checkdb = SaveForLater::where([
+            ['item_id', $item_id],
+            ['user_id', $user_id]
+        ])->exists();
 
         // If the cart is empty, create the cart.
         if(!$cart) {

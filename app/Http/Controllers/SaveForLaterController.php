@@ -56,7 +56,10 @@ class SaveForLaterController extends Controller
     {
         $user = Auth::user()->id;
 
-        auth()->user()->saveForLater->where('item_id', $item_id)->delete();
+        SaveForLater::where([
+            ['item_id', $item_id],
+            ['user_id', $user]
+        ])->delete();
 
         $request->session('cart')->forget('cart.'.$item_id.'.checkdb');
 
