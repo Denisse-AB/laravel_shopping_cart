@@ -28,10 +28,10 @@ composer v2.2.3 | node v14.6.0 | Postgresql database
 - Clone repository
 
 ```javascript
-git clone https://github.com/Denisse-AB/laravel-stripe-shoppingCart.git
+git clone https://github.com/Denisse-AB/laravel_shopping_cart.git
 
 // cd to the project root folder or
-cd laravel-stripe-shoppingCart
+cd laravel_shopping_cart
 
 composer install
 
