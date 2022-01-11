@@ -21,7 +21,7 @@ Stripe ready Shopping Cart with Laravel 8 and Vue.js.
 
 ## Requirements
 
-composer v2.2.3 | node v14.6.0 | Postgresql database
+php >=7.3.0 | composer v2.2.3 | node v14.6.0 | Postgresql database
 
 ## Installation
 
@@ -55,7 +55,7 @@ php artisan db:seed
 php artisan serve
 ```
 
-<!-- ## Donation
+## Donation
 If you like this project, buy me a cup of :coffee: :wink:
 
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?business=263QJ8D5YHR8E&no_recurring=0&item_name=I+believe+in+open+source%2C+but+a+little+donation+will+be+appreciated.+Thanks%21&currency_code=USD) -->
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?business=263QJ8D5YHR8E&no_recurring=0&item_name=I+believe+in+open+source%2C+but+a+little+donation+will+be+appreciated.+Thanks%21&currency_code=USD)
