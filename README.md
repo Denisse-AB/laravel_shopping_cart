@@ -1,3 +1,5 @@
+# **This Repository is no longer Maintained**
+
 # Laravel 8 Shopping Cart
 
 Stripe ready Shopping Cart with Laravel 8 and Vue.js.
